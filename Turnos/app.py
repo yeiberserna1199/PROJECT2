@@ -44,6 +44,6 @@ def login():
     
     if request.method == "POST":
         if not email or not password:
-            return apology()
+            return render_template("homepage.html")
     return render_template("homepage.html")
     
