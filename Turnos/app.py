@@ -5,6 +5,7 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 import datetime
 from functools import wraps
+from itsdangerous import URLSafeTimedSerializer as Serializer
 
 app = Flask(__name__)
 
@@ -21,9 +22,32 @@ SIZE = [
     "Large enterprises (250 employees or more)"
 ]
 
+QUESTION = [
+    "What was the name of the boy or the girl you first kissed?",
+    "Where were you when you had your first kiss?",
+    "In what city did you meet your spouse/significant other?",
+    "What is the middle name of your youngest child?",
+    "What was the name of your first stuffed animal?", 
+    "In what city or town did your mother and father meet?",
+    "What was the first exam you failed?",
+    "What was the name of your first school teacher?",
+    "What year did you enter college?",
+    "What is your grandmother’s maiden name?",
+    "What is your child’s nickname?",
+    "What is the manufacturer of your first car?",
+    "What was your childhood best friend’s nickname?",
+    "In which city did your parents meet?",
+    "What’s your neighbor’s last name?",
+    "How many pets did you have at 10 years old?",
+    "What month did you get married?",
+    "In which city did your mother born?"
+]
+
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
+
+
 
 connection = sqlite3.connect("turnos.db")
 cursor = connection.cursor()
@@ -66,4 +90,4 @@ def login():
 def register():
     if request.method == "POST":
         return render_template("register.html")
-    return render_template("register.html", options=OPTIONS, size=SIZE)
+    return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION)
