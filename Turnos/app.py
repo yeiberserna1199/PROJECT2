@@ -8,6 +8,19 @@ from functools import wraps
 
 app = Flask(__name__)
 
+OPTIONS = [
+    "Restaurant",
+    "Bank",
+    "Hospital"
+]
+
+SIZE = [
+    "Microentreprises (1 to 9 employees)",
+    "Small enterprises (10 to 49 employees)",
+    "Medium-sized enterprises (50 to 249 employees)",
+    "Large enterprises (250 employees or more)"
+]
+
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
@@ -36,8 +49,8 @@ def after_request(response):
     return response
 
     
-
-
+    
+    
 @app.route("/", methods=["GET", "POST"])
 def login():
     session.clear()
@@ -48,4 +61,9 @@ def login():
         if not email or not password:
             return render_template("homepage.html")
     return render_template("homepage.html")
-    
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        return render_template("register.html")
+    return render_template("register.html", options=OPTIONS, size=SIZE)
