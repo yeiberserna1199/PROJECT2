@@ -46,6 +46,20 @@
                             </div>
                             <p>  </p>
                             <p>  </p>
+                            <input class="form-control m-auto" name="phone" placeholder="Phone +" type="numeric">
+                            <p>  </p>
+                            <p>  </p>
+                            <select class="form-select form-select-auto" aria-label=".form-select-auto example">
+                                <option selected disabled>Security Question</option>
+                                {% for quest in question %}
+                                    <option value="{{ quest }}">{{quest}}</option>
+                                {% endfor %}</li>
+                            </select>
+                            <p>  </p>
+                            <p>  </p>
+                            <input class="form-control m-auto" name="answer" placeholder="Answer" type="text">
+                            <p>  </p>
+                            <p>  </p>
                             <hr class="divider">
                             <div class="d-grid gap-2">
                                 <button class="btn btn-primary" type="submit">Sign Up</button>
