@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+    {% block title %}
+        
+    {% endblock %}
+    {% block main %}
+        <form action="/forgot" method="post">
+            <div class="row align-items-start">
+                <p>  </p>
+                <p>  </p>
+                <p>  </p>
+            </div>
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <p> </p>
+                            <input autocomplete="off" autofocus class="form-control m-auto" name="email" placeholder="Email" type="text">
+                            <p>  </p>
+                            <p>  </p>
+                            <input class="form-control m-auto" name="phone" placeholder="Phone +" type="numeric">
+                            <p>  </p>
+                            <p>  </p>
+                            <select class="form-select form-select-auto" aria-label=".form-select-auto example">
+                                <option selected disabled>Security Question</option>
+                                {% for quest in question %}
+                                    <option value="{{ quest }}">{{quest}}</option>
+                                {% endfor %}</li>
+                            </select>
+                            <p>  </p>
+                            <p>  </p>
+                            <input class="form-control m-auto" name="answer" placeholder="Answer" type="text">
+                            <p>  </p>
+                            <p>  </p>
+                            <input class="form-control m-auto" name="newpassword" placeholder="New Password" type="password">
+                            <p>  </p>
+                            <p>  </p>
+                            <input class="form-control m-auto" name="confirmnewpassword" placeholder="Confirm New Password" type="password">
+                            <p>  </p>
+                            <p>  </p>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">Reset Password</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="static/turno.png">
+                    <p>  </p>
+                    <h1>Recover Your Acount!</h1>
+                    <p>Old Fashion Way!
+                        Answer The 3 Questions And That's All!
+                    </p>
+                    
+                </div>
+            </div>
+        </form>
+    {% endblock %}
