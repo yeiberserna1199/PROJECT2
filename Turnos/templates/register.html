@@ -7,7 +7,6 @@
             <div class="row align-items-start">
                 <p>  </p>
                 <p>  </p>
-                <p>  </p>
             </div>
             <div class="row align-items-center">
                 <div class="col">
@@ -25,18 +24,18 @@
                             <p> </p>
                             <div class="row">
                                 <div class="col">
-                                    <select class="form-select form-select-auto" aria-label=".form-select-auto example">
+                                    <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="business">
                                         <option selected disabled>Business</option>
                                         {% for option in options %}
-                                            <option value="{{ option }}">{{option}}</option>
+                                            <option value="{{ option }}" >{{option}}</option>
                                         {% endfor %}</li>
                                     </select>
                                 </div>
                                 <div class="col">
-                                    <select class="form-select form-select-auto" aria-label=".form-select-auto example">
+                                    <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="size">
                                         <option selected disabled>Size</option>
                                         {% for siz in size %}
-                                            <option value="{{ siz }}">{{siz}}</option>
+                                            <option value="{{ siz }}" >{{siz}}</option>
                                         {% endfor %}</li>
                                     </select>
                                 </div>
@@ -46,10 +45,10 @@
                             <input class="form-control m-auto" name="phone" placeholder="Phone +" type="numeric">
                             <p>  </p>
                             <p>  </p>
-                            <select class="form-select form-select-auto" aria-label=".form-select-auto example">
+                            <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="securityquestion">
                                 <option selected disabled>Security Question</option>
                                 {% for quest in question %}
-                                    <option value="{{ quest }}">{{quest}}</option>
+                                    <option value="{{ quest }}" >{{quest}}</option>
                                 {% endfor %}</li>
                             </select>
                             <p>  </p>
@@ -72,6 +71,11 @@
                     <p>It's Quick And Easy!
                         Are You Ready For The Next Level?
                     </p>
+                    <p>  </p>
+                    <p>  </p>
+                    {% if error %}
+                        <p class=error><strong>Error:</strong> {{ error }}
+                    {% endif %}
                     
                 </div>
             </div>
