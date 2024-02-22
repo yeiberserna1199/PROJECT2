@@ -22,6 +22,7 @@ SIZE = [
     "Large enterprises (250 employees or more)"
 ]
 
+### no supe implementar password reset con token para que eniara un codigo al correo electronico establecido por eso se utiliza las security questions###
 QUESTION = [
     "What was the name of the boy or the girl you first kissed?",
     "Where were you when you had your first kiss?",
@@ -72,8 +73,8 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-    
-    
+
+
     
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -88,6 +89,47 @@ def login():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    email = request.form.get("email")
+    password = request.form.get("password")
+    confirmpassword = request.form.get("confirm_password")
+    business = request.form.get("business")
+    size = request.form.get("size")
+    phone = request.form.get("phone")
+    security = request.form.get("securityquestion")
+    answer = request.form.get("answer")
     if request.method == "POST":
-        return render_template("register.html")
+        if not email:
+            error = "No email was found, please put your email"
+            return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION, error=error)
+        if not password:
+            error = "No password was found, please put your password"
+            return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION, error=error)
+        if not confirmpassword:
+            error = "No password confirmation was found, please put it"
+            return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION, error=error)
+        if password != confirmpassword:
+            error = "password its not the same as confirm password, please check it"
+            return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION, error=error)
+        if not business:
+            error = "No business was selected, please select it"
+            return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION, error=error)
+        if not size:
+            error = "No size was selected, please select it"
+            return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION, error=error)
+        if not phone:
+            error = "No phone was found, please put your phone"
+            return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION, error=error)
+        if not security:
+            error = "No security question was selected, please select it"
+            return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION, error=error)
+        if not answer:
+            error = "No answer was found, please put your answer"
+            return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION, error=error)
+        
     return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION)
+
+@app.route("/forgot", methods=["GET", "POST"])
+def forgot():
+    if request.method == "POST":
+        return render_template("forgot.html")
+    return render_template("forgot.html", question=QUESTION)
