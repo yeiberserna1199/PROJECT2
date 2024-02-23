@@ -97,6 +97,7 @@ def register():
     phone = request.form.get("phone")
     security = request.form.get("securityquestion")
     answer = request.form.get("answer")
+    date = datetime.datetime.now()
     if request.method == "POST":
         if not email:
             error = "No email was found, please put your email"
@@ -125,7 +126,14 @@ def register():
         if not answer:
             error = "No answer was found, please put your answer"
             return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION, error=error)
-        
+        rows = cursor.execute("SELECT * FROM user WHERE email = ?", email)
+        if len(rows) != 0:
+            error = "Email has already used. please used a different one"
+            return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION, error=error)
+        hash = generate_password_hash(password)
+        cursor.execute("INSERT INTO user (email, hash, business, size, phone, security, answer, signupdate) VALUES(?, ?, ?, ?, ?, ?, ?, ?)", email, password, business, size, phone, security, answer, date)
+        rows = cursor.execute("SELECT * FROM user WHERE email = ?", email)
+        session["user_id"] = rows[0]["id"]
     return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION)
 
 @app.route("/forgot", methods=["GET", "POST"])
