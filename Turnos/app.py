@@ -50,7 +50,7 @@ Session(app)
 
 
 
-connection = sqlite3.connect("turnos.db")
+connection = sqlite3.connect("turnos.db", check_same_thread=False)
 cursor = connection.cursor()
 
 def apology():
@@ -132,7 +132,7 @@ def register():
             return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION, error=error)
         hash = generate_password_hash(password)
         cursor.execute("INSERT INTO user (email, hash, business, size, phone, security, answer, signupdate) VALUES(?, ?, ?, ?, ?, ?, ?, ?)", email, password, business, size, phone, security, answer, date)
-        rows = cursor.execute("SELECT * FROM user WHERE email = ?", email)
+        new = cursor.execute("SELECT id FROM user WHERE email = ?", email)
         session["user_id"] = rows[0]["id"]
     return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION)
 
