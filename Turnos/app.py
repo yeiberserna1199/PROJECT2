@@ -1,5 +1,7 @@
 
-import sqlite3
+import sys
+import os
+from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -49,9 +51,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
-
-connection = sqlite3.connect("turnos.db", check_same_thread=False)
-cursor = connection.cursor()
+db = SQL("sqlite:///turnos.db")
 
 def apology():
     return render_template("apology.html")
@@ -126,13 +126,12 @@ def register():
         if not answer:
             error = "No answer was found, please put your answer"
             return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION, error=error)
-        rows = cursor.execute("SELECT * FROM user WHERE email = ?", email)
+        rows = db.execute("SELECT * FROM user WHERE email = ?", email)
         if len(rows) != 0:
-            error = "Email has already used. please used a different one"
+            error = "email is already used!"
             return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION, error=error)
         hash = generate_password_hash(password)
-        cursor.execute("INSERT INTO user (email, hash, business, size, phone, security, answer, signupdate) VALUES(?, ?, ?, ?, ?, ?, ?, ?)", email, password, business, size, phone, security, answer, date)
-        new = cursor.execute("SELECT id FROM user WHERE email = ?", email)
+        db.execute("INSERT INTO user (email, hash, business, size, phone, security, answer, signupdate) VALUES(?, ?, ?, ?, ?, ?, ?, ?)", email, password, business, size, phone, security, answer, date)
         session["user_id"] = rows[0]["id"]
     return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION)
 
