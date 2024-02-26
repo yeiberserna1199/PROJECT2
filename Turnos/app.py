@@ -84,8 +84,19 @@ def login():
     
     if request.method == "POST":
         if not email or not password:
+            error = "No email or not password was found, please put your email or password!"
             return render_template("homepage.html")
+        rows = db.execute("SELECT * FROM user WHERE email = ?", email)
+        if len(rows) != 1 or not check_password_hash(
+            rows[0]["hash"], password
+        ):
+            error = "Invalid email or password! Try again!"
+            return render_template("homepage.html", error=error)
+        session["user_id"] = rows[0]["id"]
+        print("logged in")
+        return redirect("/")
     return render_template("homepage.html")
+###se mantiene asi por el momento porque aun no he hecho el homepage luego de subcribirse ni loguearse.### 
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -131,12 +142,58 @@ def register():
             error = "email is already used!"
             return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION, error=error)
         hash = generate_password_hash(password)
-        db.execute("INSERT INTO user (email, hash, business, size, phone, security, answer, signupdate) VALUES(?, ?, ?, ?, ?, ?, ?, ?)", email, password, business, size, phone, security, answer, date)
+        db.execute("INSERT INTO user (email, hash, business, size, phone, security, answer, signupdate) VALUES(?, ?, ?, ?, ?, ?, ?, ?)", email, hash, business, size, phone, security, answer, date)
+        rows = db.execute("SELECT * FROM user WHERE email = ?", email)
         session["user_id"] = rows[0]["id"]
+        print(session["user_id"])
     return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION)
+###se mantiene asi por el momento porque aun no he hecho el homepage luego de subcribirse ni loguearse.### 
 
 @app.route("/forgot", methods=["GET", "POST"])
 def forgot():
+    email = request.form.get("email")
+    phone = request.form.get("phone")
+    security = request.form.get("securityquestion")
+    answer = request.form.get("answer")
+    password = request.form.get("newpassword")
+    newpassword = request.form.get("confirmnewpassword")
     if request.method == "POST":
+        if not email or not phone or not security or not answer or not password or not newpassword:
+            error = "Missing information!"
+            return render_template("forgot.html", question=QUESTION, error=error)
+        if password != newpassword:
+            error = "password and new password are not the same!"
+            return render_template("forgot.html", question=QUESTION, error=error)
+        rows = db.execute("SELECT * FROM user WHERE email = ?", email)
+        print(rows[0]["email"])
+        print(email)
+        print(rows[0]["phone"])
+        print(phone)
+        print(rows[0]["security"])
+        print(security)
+        print(rows[0]["answer"])
+        print(answer)
+        
+        if email != rows[0]["email"]:
+            error = "information mismatch!"
+            print("1")
+            return render_template("forgot.html", question=QUESTION, error=error)
+        if int(phone) != int(rows[0]["phone"]):
+            print("2")
+            error = "information mismatch!"
+            return render_template("forgot.html", question=QUESTION, error=error)
+        if security != rows[0]["security"]:
+            print("3")
+            error = "information mismatch!"
+            return render_template("forgot.html", question=QUESTION, error=error)
+        if answer != rows[0]["answer"]:
+            print("4")
+            error = "information mismatch!"
+            return render_template("forgot.html", question=QUESTION, error=error)
+        hash = generate_password_hash(password)
+        db.execute("UPDATE user SET hash = ? WHERE email = ?", hash, email)
+        print("change was a success")
         return render_template("forgot.html")
     return render_template("forgot.html", question=QUESTION)
+### hacer el cambio para que en la base de datos el numero de telefono no se numerico sino text###
+
