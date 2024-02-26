@@ -20,7 +20,7 @@
                             <input class="form-control m-auto" name="phone" placeholder="Phone +" type="numeric">
                             <p>  </p>
                             <p>  </p>
-                            <select class="form-select form-select-auto" aria-label=".form-select-auto example">
+                            <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="securityquestion">
                                 <option selected disabled>Security Question</option>
                                 {% for quest in question %}
                                     <option value="{{ quest }}">{{quest}}</option>
@@ -52,6 +52,9 @@
                     <p>Old Fashion Way!
                         Answer The 3 Questions And That's All!
                     </p>
+                    {% if error %}
+                        <p class=error><strong>Error:</strong> {{ error }}
+                    {% endif %}
                     
                 </div>
             </div>
