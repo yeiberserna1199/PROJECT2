@@ -23,6 +23,9 @@
                     <p>Order your customer with the best sofware on the market.</p>
                     <p>Perfect for Banks, Hospital and Restaurants!</p>
                     <p>Easy order, on time business!</p>
+                    {% if error %}
+                        <p class=error><strong>Error:</strong> {{ error }}
+                    {% endif %}
                 </div>
                 <div class="col">
                     <div class="card ">
