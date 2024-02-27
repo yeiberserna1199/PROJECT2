@@ -94,7 +94,7 @@ def login():
             return render_template("homepage.html", error=error)
         session["user_id"] = rows[0]["id"]
         print("logged in")
-        return redirect("/")
+        return redirect("/home")
     return render_template("homepage.html")
 ###se mantiene asi por el momento porque aun no he hecho el homepage luego de subcribirse ni loguearse.### 
 
@@ -197,3 +197,9 @@ def forgot():
     return render_template("forgot.html", question=QUESTION)
 ### hacer el cambio para que en la base de datos el numero de telefono no se numerico sino text###
 
+
+@app.route("/home", methods=["GET", "POST"])
+def home():
+    if request.method == "POST":
+        return render_template("home.html")
+    return render_template("home.html")
