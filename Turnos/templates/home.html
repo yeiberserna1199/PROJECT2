@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+    {% block title %}
+        
+    {% endblock %}
+    {% block main %}
+        <form action="/home" method="post">
+            <div class="row align-items-start">
+                <p>  </p>
+                <p>  </p>
+                <p>  </p>
+                <p>  </p>
+                <p>  </p>
+                <p>  </p>
+            </div>
+            <div class="row align-items-center">
+                <div class="col">
+                    <p>  </p>
+                    <p>  </p>
+                    <p>  </p>
+                    <img src="static/turno.png">
+                    <p>  </p>
+                    <h1>We Make Your Business Easier!</h1>
+                    <p>Order your customer with the best sofware on the market.</p>
+                    <p>Perfect for Banks, Hospital and Restaurants!</p>
+                    <p>Easy order, on time business!</p>
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <p> </p>
+                            <div class="d-grid gap-2"> 
+                                <button  class="btn btn-primary" name="turn" type="submit">Order Your Customers</button>
+                            </div>
+                            <p> </p>
+                            <hr class="divider">
+                            <p> </p>
+                            <div class="d-grid gap-2"> 
+                                <button  class="btn btn-primary" name="data" type="submit">Statistics</button>
+                            </div>
+                            <p> </p>
+                            <p> </p>
+                            <p> </p>
+                            
+                        <p>  </p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </form>
+    {% endblock %}
