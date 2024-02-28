@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+    {% block title %}
+        
+    {% endblock %}
+    {% block main %}
+        <form action="/order" method="post">
+            <div class="row align-items-start">
+                <p>  </p>
+                <p>  </p>
+            </div>
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <p> </p>
+                            <input autocomplete="off" autofocus class="form-control m-auto" name="name" placeholder="Name" type="text">
+                            <p> </p>
+                            <p> </p>
+                            <input autocomplete="off" autofocus class="form-control m-auto" name="lastname" placeholder="Lastname" type="text">
+                            <p> </p>
+                            <p> </p>
+                            <input autocomplete="off" autofocus class="form-control m-auto" name="email" placeholder="Email" type="text">
+                            <p> </p>
+                            <p> </p>
+                            <input class="form-control m-auto" name="phone" placeholder="Phone" type="numeric">
+                            <p> </p>
+                            <p> </p>
+                            <input autocomplete="off" autofocus name="month" placeholder="Month" type="number" min="1" max="12">
+                            <input autocomplete="off" autofocus name="day" placeholder="Day" type="number" min="1" max="31">
+                            <input autocomplete="off" autofocus name="year" placeholder="Year" type="number" min="1950" max="2024">
+                            <p>  </p>
+                            <p>  </p>
+                            <div class="col">
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="gender">
+                                    <option selected disabled>Gender</option>
+                                    {% for gend in gender %}
+                                        <option value="{{ gend }}" >{{gend}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            </div>
+                            <p>  </p>
+                            <p>  </p>
+                            <input type="checkbox" value="" aria-label="">
+                            <p>  </p>
+                            <p>  </p>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="static/turno.png">
+                    <p>  </p>
+                    <h1>Sign Up With Us!</h1>
+                    <p>It's Quick And Easy!
+                        Are You Ready For The Next Level?
+                    </p>
+                    <p>  </p>
+                    <p>  </p>
+                    {% if error %}
+                        <p class=error><strong>Error:</strong> {{ error }}
+                    {% endif %}
+                    
+                </div>
+            </div>
+        </form>
+    {% endblock %}
