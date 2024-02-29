@@ -213,6 +213,29 @@ def home():
 
 @app.route("/order", methods=["GET", "POST"])
 def order():
+    name = request.form.get("name")
+    lastname = request.form.get("lastname")
+    email = request.form.get("email")
+    phone = request.form.get("phone")
+    month = request.form.get("month")
+    day = request.form.get("day")
+    year = request.form.get("year")
+    gender = request.form.get("gender")
+    date = datetime.datetime.now()
     if request.method == "POST":
-        return render_template("order.html", gender=GENDER)
+        if not name or not lastname or not email or not phone or not month or not day or not year or not gender:
+            error = "Missing Information"
+            return render_template("order.html", gender=GENDER, error=error)
+        id = session.get("user_id")
+        user_id = id
+        db.execute("INSERT INTO customers (user_id, name, lastname, email, phone, day, month, year, gender, date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", user_id, name, lastname, email, phone, day, month, year, gender, date)
+        return redirect("/turnos")
+        
     return render_template("order.html", gender=GENDER)
+
+@app.route("/turnos", methods=["GET", "POST"])
+def turnos():
+    
+    if request.method == "POST":
+        return render_template("turnos.html")
+    return render_template("turnos.html")
