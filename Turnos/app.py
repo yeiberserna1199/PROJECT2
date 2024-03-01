@@ -235,7 +235,16 @@ def order():
 
 @app.route("/turnos", methods=["GET", "POST"])
 def turnos():
+    withdrawals = request.form.get("withdrawals")
+    advisory = request.form.get("advisory")
+    inquiries = request.form.get("inquiries") 
+    help = request.form.get("help")
+    loans = request.form.get("loans")
+    payments = request.form.get("payments")
     
     if request.method == "POST":
+        if withdrawals:
+            
+        print(withdrawals)
         return render_template("turnos.html")
     return render_template("turnos.html")
