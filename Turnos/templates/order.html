@@ -17,6 +17,19 @@
                             <input autocomplete="off" autofocus class="form-control m-auto" name="lastname" placeholder="Lastname" type="text">
                             <p> </p>
                             <p> </p>
+                            <div class="col">
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="id">
+                                    <option selected disabled>ID</option>
+                                    {% for i in ID %}
+                                        <option value="{{ i }}" >{{i}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            </div>
+                            <p>  </p>
+                            <p>  </p>
+                            <input autocomplete="off" autofocus class="form-control m-auto" name="idnumber" placeholder="ID Number" type="number">
+                            <p> </p>
+                            <p> </p>
                             <input autocomplete="off" autofocus class="form-control m-auto" name="email" placeholder="Email" type="text">
                             <p> </p>
                             <p> </p>
