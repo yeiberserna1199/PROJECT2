@@ -15,17 +15,18 @@
             </div>
             <div class="row align-items-center">
                 <div class="container">
-                    <div class="container">
-                        <div class="col">
-                            <div class="card ">
-                                <div class="card-header">
-                                    <p> </p>
-                                    <div class="card">
-                                        {% for turn in turno %}
-                                            <h3>{{turn.name}} {{turn.lastname}} YOUR TURN IS</h3>
-                                            <h1>{{turn.turn}}</h1>
-                                        {% endfor %}
-                                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <p> </p>
+                                <div class="card">
+                                    {% for turn in turno %}
+                                        <h3>{{turn.name}} {{turn.lastname}}</h3>
+                                        <h3>Your Turn:</h3>
+                                        <h1>{{turn.turn}}</h1>
+                                        <p>Please Be Aware Of The Screen!</p>
+                                        <p>Thanks For Trusting!</p>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
