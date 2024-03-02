@@ -317,6 +317,40 @@ def turnos():
             if TURNOS[3] == 999:
                 TURNOS[3] = 1
             return render_template("message.html", turno=turno)
+        if loans:
+            print(TURNOS[4])
+            rows = db.execute("SELECT name, lastname, email, phone FROM customers WHERE user_id = ?", user_id)
+            l = len(rows)
+            name = rows[l - 1]["name"]
+            lastname = rows[l - 1]["lastname"]
+            email = rows[l - 1]["email"]
+            phone = rows[l - 1]["phone"]
+            db.execute("INSERT INTO loans (turn, name, lastname, email, phone) VALUES(?,?,?,?,?)", TURNOS[4], name, lastname, email, phone)
+            loans_id = db.execute("SELECT loans_id FROM loans")
+            quantity = len(loans_id)
+            new_id = quantity - 1
+            turno = db.execute("SELECT turn, name, lastname FROM loans WHERE loans_id = ?", loans_id[new_id]["loans_id"])
+            TURNOS[4]= TURNOS[4] + 1
+            if TURNOS[4] == 999:
+                TURNOS[4] = 1
+            return render_template("message.html", turno=turno)
+        if payments:
+            print(TURNOS[5])
+            rows = db.execute("SELECT name, lastname, email, phone FROM customers WHERE user_id = ?", user_id)
+            l = len(rows)
+            name = rows[l - 1]["name"]
+            lastname = rows[l - 1]["lastname"]
+            email = rows[l - 1]["email"]
+            phone = rows[l - 1]["phone"]
+            db.execute("INSERT INTO payments (turn, name, lastname, email, phone) VALUES(?,?,?,?,?)", TURNOS[5], name, lastname, email, phone)
+            payments_id = db.execute("SELECT payments_id FROM payments")
+            quantity = len(payments_id)
+            new_id = quantity - 1
+            turno = db.execute("SELECT turn, name, lastname FROM payments WHERE loans_id = ?", payments_id[new_id]["payments_id"])
+            TURNOS[5]= TURNOS[5] + 1
+            if TURNOS[5] == 999:
+                TURNOS[5] = 1
+            return render_template("message.html", turno=turno)
         print(withdrawals)
         return render_template("turnos.html")
     return render_template("turnos.html")
