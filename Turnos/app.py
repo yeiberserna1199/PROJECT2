@@ -53,6 +53,14 @@ GENDER = [
     "Other"
 ]
 
+ID = [
+    "Passport",
+    "State ID",
+    "Foreign ID",
+    "Social Security",
+    "Driver License"
+]
+
 TURNOS = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
 
@@ -219,6 +227,8 @@ def home():
 def order():
     name = request.form.get("name")
     lastname = request.form.get("lastname")
+    id = request.form.get("id")
+    idnumber = request.form.get("idnumber")
     email = request.form.get("email")
     phone = request.form.get("phone")
     month = request.form.get("month")
@@ -227,15 +237,15 @@ def order():
     gender = request.form.get("gender")
     date = datetime.datetime.now()
     if request.method == "POST":
-        if not name or not lastname or not email or not phone or not month or not day or not year or not gender:
+        if not name or not lastname or not email or not phone or not month or not day or not year or not gender or not id or not idnumber:
             error = "Missing Information"
-            return render_template("order.html", gender=GENDER, error=error)
+            return render_template("order.html", gender=GENDER, error=error, ID=ID)
         id = session.get("user_id")
         user_id = id
-        db.execute("INSERT INTO customers (user_id, name, lastname, email, phone, day, month, year, gender, date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", user_id, name, lastname, email, phone, day, month, year, gender, date)
+        db.execute("INSERT INTO customers (user_id, name, lastname, id, id_number, email, phone, day, month, year, gender, date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", user_id, name, lastname, id, idnumber, email, phone, day, month, year, gender, date)
         return redirect("/turnos")
         
-    return render_template("order.html", gender=GENDER)
+    return render_template("order.html", gender=GENDER, ID=ID)
 
 @app.route("/turnos", methods=["GET", "POST"])
 def turnos():
@@ -351,6 +361,4 @@ def turnos():
             if TURNOS[5] == 999:
                 TURNOS[5] = 1
             return render_template("message.html", turno=turno)
-        print(withdrawals)
-        return render_template("turnos.html")
     return render_template("turnos.html")
