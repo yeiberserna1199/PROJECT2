@@ -9,6 +9,7 @@ import datetime
 from functools import wraps
 from itsdangerous import URLSafeTimedSerializer as Serializer
 
+
 app = Flask(__name__)
 
 OPTIONS = [
@@ -51,6 +52,9 @@ GENDER = [
     "Female",
     "Other"
 ]
+
+TURNOS = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -243,8 +247,76 @@ def turnos():
     payments = request.form.get("payments")
     
     if request.method == "POST":
+        id = session.get("user_id")
+        user_id = id
         if withdrawals:
-            
+            print(TURNOS[0])
+            rows = db.execute("SELECT name, lastname, email, phone FROM customers WHERE user_id = ?", user_id)
+            l = len(rows)
+            name = rows[l - 1]["name"]
+            lastname = rows[l - 1]["lastname"]
+            email = rows[l - 1]["email"]
+            phone = rows[l - 1]["phone"]
+            db.execute("INSERT INTO withdrawals (turn, name, lastname, email, phone) VALUES(?,?,?,?,?)", TURNOS[0], name, lastname, email, phone)
+            withdrawals_id = db.execute("SELECT withdrawals_id FROM withdrawals")
+            quantity = len(withdrawals_id)
+            new_id = quantity - 1
+            turno = db.execute("SELECT turn, name, lastname FROM withdrawals WHERE withdrawals_id = ?", withdrawals_id[new_id]["withdrawals_id"])
+            TURNOS[0]= TURNOS[0] + 1
+            if TURNOS[0] == 999:
+                TURNOS[0] = 1
+            return render_template("message.html", turno=turno)
+        if advisory:
+            print(TURNOS[1])
+            rows = db.execute("SELECT name, lastname, email, phone FROM customers WHERE user_id = ?", user_id)
+            l = len(rows)
+            name = rows[l - 1]["name"]
+            lastname = rows[l - 1]["lastname"]
+            email = rows[l - 1]["email"]
+            phone = rows[l - 1]["phone"]
+            db.execute("INSERT INTO advisory (turn, name, lastname, email, phone) VALUES(?,?,?,?,?)", TURNOS[1], name, lastname, email, phone)
+            advisory_id = db.execute("SELECT advisory_id FROM advisory")
+            quantity = len(advisory_id)
+            new_id = quantity - 1
+            turno = db.execute("SELECT turn, name, lastname FROM advisory WHERE advisory_id = ?", advisory_id[new_id]["advisory_id"])
+            TURNOS[1]= TURNOS[1] + 1
+            if TURNOS[1] == 999:
+                TURNOS[1] = 1
+            return render_template("message.html", turno=turno)
+        if inquiries:
+            print(TURNOS[2])
+            rows = db.execute("SELECT name, lastname, email, phone FROM customers WHERE user_id = ?", user_id)
+            l = len(rows)
+            name = rows[l - 1]["name"]
+            lastname = rows[l - 1]["lastname"]
+            email = rows[l - 1]["email"]
+            phone = rows[l - 1]["phone"]
+            db.execute("INSERT INTO inquiries (turn, name, lastname, email, phone) VALUES(?,?,?,?,?)", TURNOS[2], name, lastname, email, phone)
+            inquiries_id = db.execute("SELECT inquiries_id FROM inquiries")
+            quantity = len(inquiries_id)
+            new_id = quantity - 1
+            turno = db.execute("SELECT turn, name, lastname FROM inquiries WHERE inquiries_id = ?", inquiries_id[new_id]["inquiries_id"])
+            TURNOS[2]= TURNOS[2] + 1
+            if TURNOS[2] == 999:
+                TURNOS[2] = 1
+            return render_template("message.html", turno=turno)
+        if help:
+            print(TURNOS[3])
+            rows = db.execute("SELECT name, lastname, email, phone FROM customers WHERE user_id = ?", user_id)
+            l = len(rows)
+            name = rows[l - 1]["name"]
+            lastname = rows[l - 1]["lastname"]
+            email = rows[l - 1]["email"]
+            phone = rows[l - 1]["phone"]
+            db.execute("INSERT INTO help (turn, name, lastname, email, phone) VALUES(?,?,?,?,?)", TURNOS[3], name, lastname, email, phone)
+            help_id = db.execute("SELECT help_id FROM help")
+            quantity = len(help_id)
+            new_id = quantity - 1
+            turno = db.execute("SELECT turn, name, lastname FROM help WHERE help_id = ?", help_id[new_id]["help_id"])
+            TURNOS[3]= TURNOS[3] + 1
+            if TURNOS[3] == 999:
+                TURNOS[3] = 1
+            return render_template("message.html", turno=turno)
         print(withdrawals)
         return render_template("turnos.html")
     return render_template("turnos.html")
