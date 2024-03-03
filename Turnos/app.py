@@ -362,3 +362,9 @@ def turnos():
                 TURNOS[5] = 1
             return render_template("message.html", turno=turno)
     return render_template("turnos.html")
+
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/")
