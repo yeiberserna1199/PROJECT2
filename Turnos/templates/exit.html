@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+    {% block title %}
+        
+    {% endblock %}
+    {% block main %}
+        <form action="/exit" method="post">
+            <div class="row align-items-start">
+                <p>  </p>
+                <p>  </p>
+                <p>  </p>
+                <p>  </p>
+                <p>  </p>
+                <p>  </p>
+            </div>
+            <div class="row align-items-center">
+                <div class="col">
+                    <p>  </p>
+                    <p>  </p>
+                    <p>  </p>
+                    <img src="static/turno.png">
+                    <p>  </p>
+                    <h1>Exit Customer Side!</h1>
+                    <p>Go To The Admin Page!</p>
+                    <p>Uncover The Potencial Of TurnO!</p>
+                    <p>For Your Data Safety, We Want To Be Sure That's Is You</p>
+                    {% if error %}
+                        <p class=error><strong>Error:</strong> {{ error }}
+                    {% endif %}
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <p> </p>
+                            <input autocomplete="off" autofocus class="form-control m-auto" name="email" placeholder="Email" type="text">
+                            <p> </p>
+                            <p> </p>
+                            <input class="form-control m-auto" name="password" placeholder="Password" type="password">
+                            <p> </p>
+                            <p> </p>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">Exit Customer Side</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    {% endblock %}
