@@ -2,6 +2,24 @@
     {% block title %}
         
     {% endblock %}
+    {% block house %} 
+    <nav class="bg-light border navbar navbar-expand-md navbar-light">
+        <div class="container-fluid">
+            <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                
+                <ul class="navbar-nav me-auto mt-2">
+                </ul>
+                <ul class="navbar-nav ms-auto mt-2">
+                    <li class="nav-item"><a class="nav-link" href="/exit">Exit</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    {% endblock %}
     {% block main %}
         <form action="/order" method="post">
             <div class="row align-items-start">
