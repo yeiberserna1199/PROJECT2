@@ -379,7 +379,6 @@ def exit():
             error = "Wrong Credentials!"
             return render_template("exit.html", error=error)
         rows = db.execute("SELECT * FROM user WHERE email = ?", email)
-        print(rows)
         if rows == []:
             error = "Email was not found!"
             return render_template("exit.html", error=error)
