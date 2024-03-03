@@ -368,3 +368,31 @@ def turnos():
 def logout():
     session.clear()
     return redirect("/")
+
+@app.route("/exit", methods=["GET", "POST"])
+def exit():
+    email = request.form.get("email")
+    password = request.form.get("password")
+    
+    if request.method == "POST":
+        if not email or not password:
+            error = "Wrong Credentials!"
+            return render_template("exit.html", error=error)
+        rows = db.execute("SELECT * FROM user WHERE email = ?", email)
+        print(rows)
+        if rows == []:
+            error = "Email was not found!"
+            return render_template("exit.html", error=error)
+        if email != rows[0]["email"]:
+            error = "Email Incorrect!"
+            return render_template("exit.html", error=error)
+        if not check_password_hash(
+            rows[0]["hash"], password
+        ):
+            error = "passowrd Incorrect!"
+            return render_template("exit.html", error=error)
+        return redirect("/home")
+    return render_template("exit.html")
+
+
+### menu/staff to make the part of the staff that say next turn and alll that shit ###
