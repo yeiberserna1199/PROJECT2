@@ -255,6 +255,7 @@ def turnos():
     help = request.form.get("help")
     loans = request.form.get("loans")
     payments = request.form.get("payments")
+    date = datetime.datetime.now()
     
     if request.method == "POST":
         id = session.get("user_id")
@@ -267,7 +268,7 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO withdrawals (turn, name, lastname, email, phone) VALUES(?,?,?,?,?)", TURNOS[0], name, lastname, email, phone)
+            db.execute("INSERT INTO withdrawals (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[0], name, lastname, email, phone, date)
             withdrawals_id = db.execute("SELECT withdrawals_id FROM withdrawals")
             quantity = len(withdrawals_id)
             new_id = quantity - 1
@@ -284,7 +285,7 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO advisory (turn, name, lastname, email, phone) VALUES(?,?,?,?,?)", TURNOS[1], name, lastname, email, phone)
+            db.execute("INSERT INTO advisory (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[1], name, lastname, email, phone, date)
             advisory_id = db.execute("SELECT advisory_id FROM advisory")
             quantity = len(advisory_id)
             new_id = quantity - 1
@@ -301,7 +302,7 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO inquiries (turn, name, lastname, email, phone) VALUES(?,?,?,?,?)", TURNOS[2], name, lastname, email, phone)
+            db.execute("INSERT INTO inquiries (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[2], name, lastname, email, phone, date)
             inquiries_id = db.execute("SELECT inquiries_id FROM inquiries")
             quantity = len(inquiries_id)
             new_id = quantity - 1
@@ -318,7 +319,7 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO help (turn, name, lastname, email, phone) VALUES(?,?,?,?,?)", TURNOS[3], name, lastname, email, phone)
+            db.execute("INSERT INTO help (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[3], name, lastname, email, phone, date)
             help_id = db.execute("SELECT help_id FROM help")
             quantity = len(help_id)
             new_id = quantity - 1
@@ -335,7 +336,7 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO loans (turn, name, lastname, email, phone) VALUES(?,?,?,?,?)", TURNOS[4], name, lastname, email, phone)
+            db.execute("INSERT INTO loans (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[4], name, lastname, email, phone, date)
             loans_id = db.execute("SELECT loans_id FROM loans")
             quantity = len(loans_id)
             new_id = quantity - 1
@@ -352,7 +353,7 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO payments (turn, name, lastname, email, phone) VALUES(?,?,?,?,?)", TURNOS[5], name, lastname, email, phone)
+            db.execute("INSERT INTO payments (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[5], name, lastname, email, phone, date)
             payments_id = db.execute("SELECT payments_id FROM payments")
             quantity = len(payments_id)
             new_id = quantity - 1
@@ -392,6 +393,9 @@ def exit():
             return render_template("exit.html", error=error)
         return redirect("/home")
     return render_template("exit.html")
+
+
+
 
 
 ### menu/staff to make the part of the staff that say next turn and alll that shit ###
