@@ -395,7 +395,17 @@ def exit():
     return render_template("exit.html")
 
 
-
+@app.route("/stats", methods=["GET", "POST"])
+def stats():
+    month = request.form.get("month")
+    day = request.form.get("day")
+    year = request.form.get("year")
+    if request.method == "POST":
+        total = db.execute("SELECT * FROM customers")
+        return render_template("stats.html", total=total)
+    return render_template("stats.html")
+    
+    
 
 
 ### menu/staff to make the part of the staff that say next turn and alll that shit ###
