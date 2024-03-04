@@ -1,0 +1,148 @@
+{% extends "layout.html" %}
+    {% block title %}
+        
+    {% endblock %}
+    {% block house %} 
+    <nav class="bg-light border navbar navbar-expand-md navbar-light">
+        <div class="container-fluid">
+            <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                
+                <ul class="navbar-nav me-auto mt-2">
+                    <li class="nav-item"><a class="nav-link" href="/home">Back</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto mt-2">
+                    <li class="nav-item"><a class="nav-link" href="/exit">Exit</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    {% endblock %}
+    {% block main %}
+        <form action="/stats" method="post">
+            <div class="row align-items-start">
+                <div class="col">
+                    <input autocomplete="off" class="form-control m-auto" autofocus name="month" placeholder="MM" type="number" min="1" max="12">
+                </div>
+                <div class="col">
+                    <input autocomplete="off" class="form-control m-auto" autofocus name="day" placeholder="DD" type="number" min="1" max="31">
+                </div>
+                <div class="col">
+                    <input autocomplete="off" class="form-control m-auto" autofocus name="year" placeholder="YYYY" type="number" min="1950" max="2024">
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary" type="submit">Continue</button>
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <div>
+                                <h1>Total:</h1>
+                                <h1>{{total}} </h1>
+                            </div>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>  </p>
+            <p>  </p>
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <div>
+                                <h1>Total:</h1>
+                            </div>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <div>
+                                <h1>Total:</h1>
+                            </div>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <div>
+                                <h1>Total:</h1>
+                            </div>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>  </p>
+            <p>  </p>
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <div>
+                                <h1>Total:</h1>
+                            </div>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <div>
+                                <h1>Total:</h1>
+                            </div>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <div>
+                                <h1>Total:</h1>
+                            </div>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    {% endblock %}
