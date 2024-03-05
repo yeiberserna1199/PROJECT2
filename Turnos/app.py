@@ -5,7 +5,7 @@ from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-import datetime
+from datetime import date, datetime
 from functools import wraps
 from itsdangerous import URLSafeTimedSerializer as Serializer
 
@@ -235,7 +235,7 @@ def order():
     day = request.form.get("day")
     year = request.form.get("year")
     gender = request.form.get("gender")
-    date = datetime.datetime.now()
+    date = date.today()
     if request.method == "POST":
         if not name or not lastname or not email or not phone or not month or not day or not year or not gender or not id or not idnumber:
             error = "Missing Information"
@@ -255,7 +255,7 @@ def turnos():
     help = request.form.get("help")
     loans = request.form.get("loans")
     payments = request.form.get("payments")
-    date = datetime.datetime.now()
+    date = date.today()
     
     if request.method == "POST":
         id = session.get("user_id")
