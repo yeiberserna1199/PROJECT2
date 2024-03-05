@@ -397,11 +397,20 @@ def exit():
 
 @app.route("/stats", methods=["GET", "POST"])
 def stats():
-    month = request.form.get("month")
-    day = request.form.get("day")
-    year = request.form.get("year")
+    m = (request.form.get("month"))
+    d = (request.form.get("day"))
+    y = (request.form.get("year"))
     if request.method == "POST":
-        total = db.execute("SELECT * FROM customers")
+        month = str(m)
+        day = str(d)
+        year = str(y)
+        g = "-"
+        p = "%"
+        q = "'"
+        año = 2004
+        date = (year + g + month + g + day)
+        total = db.execute("SELECT COUNT(*) as count FROM customers WHERE year = ?", año)
+        print(total)
         return render_template("stats.html", total=total)
     return render_template("stats.html")
     
