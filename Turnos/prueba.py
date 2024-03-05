@@ -1,3 +1,3 @@
-from datetime import datetime, year
-
-print(datetime.date())
+from datetime import date
+current_date = date.today()
+print(current_date)
