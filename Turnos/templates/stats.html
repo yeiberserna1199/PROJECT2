@@ -95,7 +95,10 @@
                     <div class="card ">
                         <div class="card-header">
                             <div>
-                                <h1>Total:</h1>
+                                <h5>Total:</h5>
+                                {% for adv in advisory %}
+                                    <h3>{{adv.count}} </h3>
+                                {% endfor %}
                             </div>
                             <hr class="divider">
                             <div class="d-grid gap-2">
@@ -112,9 +115,10 @@
                 <div class="col">
                     <div class="card ">
                         <div class="card-header">
-                            <div>
-                                <h1>Total:</h1>
-                            </div>
+                            {% for inqu in inquiries %}
+                                <h3>{{inqu.count}} </h3>
+                            {% endfor %}
+                        </div>
                             <hr class="divider">
                             <div class="d-grid gap-2">
                                 <button class="btn btn-primary" type="submit">Continue</button>
@@ -126,8 +130,10 @@
                 <div class="col">
                     <div class="card ">
                         <div class="card-header">
-                            <div>
-                                <h1>Total:</h1>
+                            <div class="card-header">
+                                {% for hel in help %}
+                                    <h3>{{hel.count}} </h3>
+                                {% endfor %}
                             </div>
                             <hr class="divider">
                             <div class="d-grid gap-2">
