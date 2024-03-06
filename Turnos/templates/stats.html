@@ -24,6 +24,7 @@
     {% block main %}
         <form action="/stats" method="post">
             <div class="row align-items-start">
+                <p>From:</p>
                 <div class="col">
                     <input autocomplete="off" class="form-control m-auto" autofocus name="month" placeholder="MM" type="number" min="1" max="12">
                 </div>
@@ -32,6 +33,16 @@
                 </div>
                 <div class="col">
                     <input autocomplete="off" class="form-control m-auto" autofocus name="year" placeholder="YYYY" type="number" min="1950" max="2024">
+                </div>
+                <p>To:</p>
+                <div class="col">
+                    <input autocomplete="off" class="form-control m-auto" autofocus name="month2" placeholder="MM" type="number" min="1" max="12">
+                </div>
+                <div class="col">
+                    <input autocomplete="off" class="form-control m-auto" autofocus name="day2" placeholder="DD" type="number" min="1" max="31">
+                </div>
+                <div class="col">
+                    <input autocomplete="off" class="form-control m-auto" autofocus name="year2" placeholder="YYYY" type="number" min="1950" max="2024">
                 </div>
                 <div class="col">
                     <button class="btn btn-primary" type="submit">Continue</button>
@@ -61,7 +72,7 @@
                     <div class="card ">
                         <div class="card-header">
                             <div>
-                                <h5>Total:</h5>
+                                <h5>Withdrawals:</h5>
                                 {% for with in withdrawals %}
                                     <h3>{{with.count}} </h3>
                                 {% endfor %}
@@ -78,26 +89,26 @@
                     <div class="card ">
                         <div class="card-header">
                             <div>
-                                <h5>Total:</h5>
-                                {% for with in withdrawals %}
-                                    <h3>{{with.count}} </h3>
-                                {% endfor %}
-                            </div>
-                            <hr class="divider">
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-primary" type="submit">Continue</button>
-                            </div>
-                            <p> </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card ">
-                        <div class="card-header">
-                            <div>
-                                <h5>Total:</h5>
+                                <h5>Advisory:</h5>
                                 {% for adv in advisory %}
                                     <h3>{{adv.count}} </h3>
+                                {% endfor %}
+                            </div>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <div>
+                                <h5>Inquiries:</h5>
+                                {% for inqu in inquiries %}
+                                    <h3>{{inqu.count}} </h3>
                                 {% endfor %}
                             </div>
                             <hr class="divider">
@@ -115,22 +126,8 @@
                 <div class="col">
                     <div class="card ">
                         <div class="card-header">
-                            {% for inqu in inquiries %}
-                                <h3>{{inqu.count}} </h3>
-                            {% endfor %}
-                        </div>
-                            <hr class="divider">
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-primary" type="submit">Continue</button>
-                            </div>
-                            <p> </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card ">
-                        <div class="card-header">
-                            <div class="card-header">
+                            <div>
+                                <h5>Help:</h5>
                                 {% for hel in help %}
                                     <h3>{{hel.count}} </h3>
                                 {% endfor %}
@@ -147,7 +144,27 @@
                     <div class="card ">
                         <div class="card-header">
                             <div>
-                                <h1>Total:</h1>
+                                <h5>Loans:</h5>
+                                {% for loan in loans %}
+                                    <h3>{{loan.count}} </h3>
+                                {% endfor %}
+                            </div>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <div>
+                                <h5>Payments:</h5>
+                                {% for pay in payments %}
+                                    <h3>{{pay.count}} </h3>
+                                {% endfor %}
                             </div>
                             <hr class="divider">
                             <div class="d-grid gap-2">
