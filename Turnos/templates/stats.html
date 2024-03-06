@@ -61,7 +61,10 @@
                     <div class="card ">
                         <div class="card-header">
                             <div>
-                                <h1>Total:</h1>
+                                <h5>Total:</h5>
+                                {% for with in withdrawals %}
+                                    <h3>{{with.count}} </h3>
+                                {% endfor %}
                             </div>
                             <hr class="divider">
                             <div class="d-grid gap-2">
@@ -75,7 +78,10 @@
                     <div class="card ">
                         <div class="card-header">
                             <div>
-                                <h1>Total:</h1>
+                                <h5>Total:</h5>
+                                {% for with in withdrawals %}
+                                    <h3>{{with.count}} </h3>
+                                {% endfor %}
                             </div>
                             <hr class="divider">
                             <div class="d-grid gap-2">
