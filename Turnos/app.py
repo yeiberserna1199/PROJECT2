@@ -235,14 +235,14 @@ def order():
     day = request.form.get("day")
     year = request.form.get("year")
     gender = request.form.get("gender")
-    date = date.today()
+    dat = date.today()
     if request.method == "POST":
         if not name or not lastname or not email or not phone or not month or not day or not year or not gender or not id or not idnumber:
             error = "Missing Information"
             return render_template("order.html", gender=GENDER, error=error, ID=ID)
         id = session.get("user_id")
         user_id = id
-        db.execute("INSERT INTO customers (user_id, name, lastname, id, id_number, email, phone, day, month, year, gender, date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", user_id, name, lastname, id, idnumber, email, phone, day, month, year, gender, date)
+        db.execute("INSERT INTO customers (user_id, name, lastname, id, id_number, email, phone, day, month, year, gender, date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", user_id, name, lastname, id, idnumber, email, phone, day, month, year, gender, dat)
         return redirect("/turnos")
         
     return render_template("order.html", gender=GENDER, ID=ID)
@@ -255,7 +255,7 @@ def turnos():
     help = request.form.get("help")
     loans = request.form.get("loans")
     payments = request.form.get("payments")
-    date = date.today()
+    dat = date.today()
     
     if request.method == "POST":
         id = session.get("user_id")
@@ -268,7 +268,7 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO withdrawals (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[0], name, lastname, email, phone, date)
+            db.execute("INSERT INTO withdrawals (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[0], name, lastname, email, phone, dat)
             withdrawals_id = db.execute("SELECT withdrawals_id FROM withdrawals")
             quantity = len(withdrawals_id)
             new_id = quantity - 1
@@ -405,13 +405,16 @@ def stats():
         day = str(d)
         year = str(y)
         g = "-"
-        p = "%"
-        q = "'"
-        año = 2004
         date = (year + g + month + g + day)
-        total = db.execute("SELECT COUNT(*) as count FROM customers WHERE year = ?", año)
+        total = db.execute("SELECT COUNT(*) as count FROM customers WHERE date = ?", date)
+        withdrawals = db.execute("SELECT COUNT(*) as count FROM withdrawals WHERE date = ?", date)
+        advisory = db.execute("SELECT COUNT(*) as count FROM advisory WHERE date = ?", date)
+        inquiries = db.execute("SELECT COUNT(*) as count FROM inquiries WHERE date = ?", date)
+        help = db.execute("SELECT COUNT(*) as count FROM help WHERE date = ?", date)
+        loans = db.execute("SELECT COUNT(*) as count FROM loans WHERE date = ?", date)
+        payments = db.execute("SELECT COUNT(*) as count FROM payments WHERE date = ?", date)
         print(total)
-        return render_template("stats.html", total=total)
+        return render_template("stats.html", total=total, withdrawals=withdrawals)
     return render_template("stats.html")
     
     
