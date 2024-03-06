@@ -414,7 +414,7 @@ def stats():
         loans = db.execute("SELECT COUNT(*) as count FROM loans WHERE date = ?", date)
         payments = db.execute("SELECT COUNT(*) as count FROM payments WHERE date = ?", date)
         print(total)
-        return render_template("stats.html", total=total, withdrawals=withdrawals)
+        return render_template("stats.html", total=total, withdrawals=withdrawals, advisory=advisory, inquiries=inquiries, help=help, loans=loans, payments=payments)
     return render_template("stats.html")
     
     
