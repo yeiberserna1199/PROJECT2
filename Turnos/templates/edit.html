@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+    {% block title %}
+        
+    {% endblock %}
+    {% block house %}
+    <nav class="bg-light border navbar navbar-expand-md navbar-light">
+        <div class="container-fluid">
+            <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                
+                <ul class="navbar-nav me-auto mt-2">
+                    <li class="nav-item"><a class="nav-link" href="/home">Back</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto mt-2">
+                    <li class="nav-item"><a class="nav-link" href="/logout">Log out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% endblock %}
+    {% block main %}
+        <form action="/profile" method="post">
+            <div class="row align-items-start">
+                <p>  </p>
+                <p>  </p>
+                <p>  </p>
+                <p>  </p>
+                <p>  </p>
+                <p>  </p>
+            </div>
+            <div class="row align-items-center">
+                <div class="col">
+                    <p>  </p>
+                    <p>  </p>
+                    <p>  </p>
+                    <img src="static/turno.png">
+                    <p>  </p>
+                    <h1>We Make Your Business Easier!</h1>
+                    <p>Order your customer with the best sofware on the market.</p>
+                    <p>Perfect for Banks, Hospital and Restaurants!</p>
+                    <p>Easy order, on time business!</p>
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <p> </p>
+                            {% for row in rows %}
+                                <div class="d-grid gap-2"> 
+                                    <p>{{row.email}} </p>
+                                    <button class="btn btn-primary" type="submit" name="email" value="1">Edit</button>
+                                </div>
+                                <p> </p>
+                                <hr class="divider">
+                                <p> </p>
+                                <div class="d-grid gap-2"> 
+                                    <input autocomplete="off" autofocus class="form-control m-auto" name="name" placeholder="Name" type="text">
+                                </div>
+                                <p> </p>
+                                <hr class="divider">
+                                <p> </p>
+                                <div class="d-grid gap-2"> 
+                                    <input autocomplete="off" autofocus class="form-control m-auto" name="name" placeholder="Name" type="text">
+                                </div>
+                                <p> </p>
+                                <hr class="divider">
+                                <p> </p>
+                                <div class="d-grid gap-2"> 
+                                    <p> {{row.phone}} </p>
+                                    <button class="btn btn-primary" type="submit" name="phonoe" value="4">Edit</button>
+                                </div>
+                                <p> </p>
+                                <p> </p>
+                                <p> </p>
+                                <p> </p>
+                            {% endfor %}
+                            
+                        <p>  </p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </form>
+    {% endblock %}
