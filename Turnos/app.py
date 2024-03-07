@@ -225,8 +225,8 @@ def home():
 
 @app.route("/order", methods=["GET", "POST"])
 def order():
-    name = request.form.get("name")
-    lastname = request.form.get("lastname")
+    name = str(request.form.get("name")).capitalize()
+    lastname = str(request.form.get("lastname")).capitalize()
     ids = request.form.get("id")
     idnumber = request.form.get("idnumber")
     email = request.form.get("email")
@@ -285,7 +285,7 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO advisory (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[1], name, lastname, email, phone, date)
+            db.execute("INSERT INTO advisory (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[1], name, lastname, email, phone, dat)
             advisory_id = db.execute("SELECT advisory_id FROM advisory")
             quantity = len(advisory_id)
             new_id = quantity - 1
@@ -302,7 +302,7 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO inquiries (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[2], name, lastname, email, phone, date)
+            db.execute("INSERT INTO inquiries (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[2], name, lastname, email, phone, dat)
             inquiries_id = db.execute("SELECT inquiries_id FROM inquiries")
             quantity = len(inquiries_id)
             new_id = quantity - 1
@@ -319,7 +319,7 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO help (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[3], name, lastname, email, phone, date)
+            db.execute("INSERT INTO help (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[3], name, lastname, email, phone, dat)
             help_id = db.execute("SELECT help_id FROM help")
             quantity = len(help_id)
             new_id = quantity - 1
@@ -336,7 +336,7 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO loans (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[4], name, lastname, email, phone, date)
+            db.execute("INSERT INTO loans (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[4], name, lastname, email, phone, dat)
             loans_id = db.execute("SELECT loans_id FROM loans")
             quantity = len(loans_id)
             new_id = quantity - 1
@@ -353,7 +353,7 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO payments (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[5], name, lastname, email, phone, date)
+            db.execute("INSERT INTO payments (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[5], name, lastname, email, phone, dat)
             payments_id = db.execute("SELECT payments_id FROM payments")
             quantity = len(payments_id)
             new_id = quantity - 1
@@ -397,7 +397,6 @@ def exit():
 
 @app.route("/stats", methods=["GET", "POST"])
 def stats():
-    first = request.form.get("total")
     m = (request.form.get("month"))
     d = (request.form.get("day"))
     y = (request.form.get("year"))
@@ -415,18 +414,37 @@ def stats():
         date = (year + g + month + g + day)
         date2 = (year2 + g + month2 + g + day2)
         total = db.execute("SELECT COUNT(*) as count FROM customers WHERE date BETWEEN ? AND ?", date, date2)
-        totalrows = db.execute("SELECT * FROM customers WHERE date BETWEEN ? AND ?", date, date2)
-        print(totalrows)
         withdrawals = db.execute("SELECT COUNT(*) as count FROM withdrawals WHERE date BETWEEN ? AND ?", date, date2)
         advisory = db.execute("SELECT COUNT(*) as count FROM advisory WHERE date BETWEEN ? AND ?", date, date2)
         inquiries = db.execute("SELECT COUNT(*) as count FROM inquiries WHERE date BETWEEN ? AND ?", date, date2)
         help = db.execute("SELECT COUNT(*) as count FROM help WHERE date BETWEEN ? AND ?", date, date2)
         loans = db.execute("SELECT COUNT(*) as count FROM loans WHERE date BETWEEN ? AND ?", date, date2)
         payments = db.execute("SELECT COUNT(*) as count FROM payments WHERE date BETWEEN ? AND ?", date, date2)
-        if first:
-            return render_template("table.html", rows=totalrows)
+        if request.form.get("total"):
+            rows = db.execute("SELECT * FROM customers")
+            return render_template("table.html", rows=rows)
+        if request.form.get("withdrawals"):
+            rows = db.execute("SELECT * FROM withdrawals")
+            return render_template("table.html", rows=rows)
+        if request.form.get("advisory"):
+            rows = db.execute("SELECT * FROM advisory")
+            return render_template("table.html", rows=rows)
+        if request.form.get("inquiries"):
+            rows = db.execute("SELECT * FROM inquiries")
+            return render_template("table.html", rows=rows)
+        if request.form.get("help"):
+            rows = db.execute("SELECT * FROM help")
+            return render_template("table.html", rows=rows)
+        if request.form.get("loans"):
+            rows = db.execute("SELECT * FROM loans")
+            return render_template("table.html", rows=rows)
+        if request.form.get("payments"):
+            rows = db.execute("SELECT * FROM payments")
+            return render_template("table.html", rows=rows)
         return render_template("stats.html", total=total, withdrawals=withdrawals, advisory=advisory, inquiries=inquiries, help=help, loans=loans, payments=payments)
     return render_template("stats.html")
+
+
     
     
 
