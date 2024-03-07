@@ -24,25 +24,32 @@
     {% block main %}
         <form action="/stats" method="post">
             <div class="row align-items-start">
-                <p>From:</p>
+                
                 <div class="col">
-                    <input autocomplete="off" class="form-control m-auto" autofocus name="month" placeholder="MM" type="number" min="1" max="12">
+                    <h5>From</h5>
                 </div>
                 <div class="col">
-                    <input autocomplete="off" class="form-control m-auto" autofocus name="day" placeholder="DD" type="number" min="1" max="31">
+                    
+                    <input autocomplete="off" class="form-control m-auto" size="number" autofocus name="month" placeholder="MM" type="number" min="1" max="12">
                 </div>
                 <div class="col">
-                    <input autocomplete="off" class="form-control m-auto" autofocus name="year" placeholder="YYYY" type="number" min="1950" max="2024">
-                </div>
-                <p>To:</p>
-                <div class="col">
-                    <input autocomplete="off" class="form-control m-auto" autofocus name="month2" placeholder="MM" type="number" min="1" max="12">
+                    <input autocomplete="off" class="form-control m-auto" size="number" autofocus name="day" placeholder="DD" type="number" min="1" max="31">
                 </div>
                 <div class="col">
-                    <input autocomplete="off" class="form-control m-auto" autofocus name="day2" placeholder="DD" type="number" min="1" max="31">
+                    <input autocomplete="off" class="form-control m-auto" size="number" autofocus name="year" placeholder="YYYY" type="number" min="1950" max="2024">
+                </div>
+                
+                <div class="col">
+                    <h5>To</h5>
                 </div>
                 <div class="col">
-                    <input autocomplete="off" class="form-control m-auto" autofocus name="year2" placeholder="YYYY" type="number" min="1950" max="2024">
+                    <input autocomplete="off" class="form-control m-auto" size="number" autofocus name="month2" placeholder="MM" type="number" min="1" max="12">
+                </div>
+                <div class="col">
+                    <input autocomplete="off" class="form-control m-auto" size="number" autofocus name="day2" placeholder="DD" type="number" min="1" max="31">
+                </div>
+                <div class="col">
+                    <input autocomplete="off" class="form-control m-auto" size="number" autofocus name="year2" placeholder="YYYY" type="number" min="1950" max="2024">
                 </div>
                 <div class="col">
                     <button class="btn btn-primary" type="submit">Continue</button>
