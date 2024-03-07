@@ -445,6 +445,17 @@ def stats():
     return render_template("stats.html")
 
 
+@app.route("/profile", methods=["GET", "POST"])
+def profile(): 
+    rows = db.execute("SELECT * FROM user")
+    print(rows)
+    return render_template("profile.html", rows=rows)
+    
+    
+    
+    
+
+
     
     
 
