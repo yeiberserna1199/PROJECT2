@@ -397,6 +397,7 @@ def exit():
 
 @app.route("/stats", methods=["GET", "POST"])
 def stats():
+    first = request.form.get("total")
     m = (request.form.get("month"))
     d = (request.form.get("day"))
     y = (request.form.get("year"))
@@ -414,16 +415,16 @@ def stats():
         date = (year + g + month + g + day)
         date2 = (year2 + g + month2 + g + day2)
         total = db.execute("SELECT COUNT(*) as count FROM customers WHERE date BETWEEN ? AND ?", date, date2)
+        totalrows = db.execute("SELECT * FROM customers WHERE date BETWEEN ? AND ?", date, date2)
+        print(totalrows)
         withdrawals = db.execute("SELECT COUNT(*) as count FROM withdrawals WHERE date BETWEEN ? AND ?", date, date2)
         advisory = db.execute("SELECT COUNT(*) as count FROM advisory WHERE date BETWEEN ? AND ?", date, date2)
         inquiries = db.execute("SELECT COUNT(*) as count FROM inquiries WHERE date BETWEEN ? AND ?", date, date2)
         help = db.execute("SELECT COUNT(*) as count FROM help WHERE date BETWEEN ? AND ?", date, date2)
         loans = db.execute("SELECT COUNT(*) as count FROM loans WHERE date BETWEEN ? AND ?", date, date2)
         payments = db.execute("SELECT COUNT(*) as count FROM payments WHERE date BETWEEN ? AND ?", date, date2)
-        first = request.form.get("total")
         if first:
-            rows = db.execute("SELECT * FROM customers WHERE date BETWEEN ? AND ?", date, date2)
-            return render_template("table.html", rows=rows)
+            return render_template("table.html", rows=totalrows)
         return render_template("stats.html", total=total, withdrawals=withdrawals, advisory=advisory, inquiries=inquiries, help=help, loans=loans, payments=payments)
     return render_template("stats.html")
     
