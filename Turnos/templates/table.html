@@ -33,17 +33,83 @@
             </tr>
         </thead>
         <tbody>
-            
-            {% for row in rows %}
-                <tr>
-                    <td class="text-start">{{row.name}}</td>
-                    <td class="text-end">{{row.lastname}}</td>
-                    <td class="text-end">{{row.email}}</td>
-                    <td class="text-end">{{row.phone}}</td>
-                    <td class="text-end">{{row.date}}</td>
-                </tr>
-            {% endfor %}
-            
+            {% if request.form.get("total") %}
+                {% for row in rows %}
+                    <tr>
+                        <td class="text-start">{{row.name}}</td>
+                        <td class="text-end">{{row.lastname}}</td>
+                        <td class="text-end">{{row.email}}</td>
+                        <td class="text-end">{{row.phone}}</td>
+                        <td class="text-end">{{row.date}}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            {% if request.form.get("withdrawals") %}
+                {% for row in rows %}
+                    <tr>
+                        <td class="text-start">{{row.name}}</td>
+                        <td class="text-end">{{row.lastname}}</td>
+                        <td class="text-end">{{row.email}}</td>
+                        <td class="text-end">{{row.phone}}</td>
+                        <td class="text-end">{{row.date}}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            {% if request.form.get("advisory") %}
+                {% for row in rows %}
+                    <tr>
+                        <td class="text-start">{{row.name}}</td>
+                        <td class="text-end">{{row.lastname}}</td>
+                        <td class="text-end">{{row.email}}</td>
+                        <td class="text-end">{{row.phone}}</td>
+                        <td class="text-end">{{row.date}}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            {% if request.form.get("inquiries") %}
+                {% for row in rows %}
+                    <tr>
+                        <td class="text-start">{{row.name}}</td>
+                        <td class="text-end">{{row.lastname}}</td>
+                        <td class="text-end">{{row.email}}</td>
+                        <td class="text-end">{{row.phone}}</td>
+                        <td class="text-end">{{row.date}}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            {% if request.form.get("help") %}
+                {% for row in rows %}
+                    <tr>
+                        <td class="text-start">{{row.name}}</td>
+                        <td class="text-end">{{row.lastname}}</td>
+                        <td class="text-end">{{row.email}}</td>
+                        <td class="text-end">{{row.phone}}</td>
+                        <td class="text-end">{{row.date}}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            {% if request.form.get("loans") %}
+                {% for row in rows %}
+                    <tr>
+                        <td class="text-start">{{row.name}}</td>
+                        <td class="text-end">{{row.lastname}}</td>
+                        <td class="text-end">{{row.email}}</td>
+                        <td class="text-end">{{row.phone}}</td>
+                        <td class="text-end">{{row.date}}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            {% if request.form.get("payments") %}
+                {% for row in rows %}
+                    <tr>
+                        <td class="text-start">{{row.name}}</td>
+                        <td class="text-end">{{row.lastname}}</td>
+                        <td class="text-end">{{row.email}}</td>
+                        <td class="text-end">{{row.phone}}</td>
+                        <td class="text-end">{{row.date}}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
         </tbody>
     </table>
 </div>
