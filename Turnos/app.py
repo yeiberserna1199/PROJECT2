@@ -227,7 +227,7 @@ def home():
 def order():
     name = request.form.get("name")
     lastname = request.form.get("lastname")
-    id = request.form.get("id")
+    ids = request.form.get("id")
     idnumber = request.form.get("idnumber")
     email = request.form.get("email")
     phone = request.form.get("phone")
@@ -237,12 +237,12 @@ def order():
     gender = request.form.get("gender")
     dat = date.today()
     if request.method == "POST":
-        if not name or not lastname or not email or not phone or not month or not day or not year or not gender or not id or not idnumber:
+        if not name or not lastname or not email or not phone or not month or not day or not year or not gender or not ids or not idnumber:
             error = "Missing Information"
             return render_template("order.html", gender=GENDER, error=error, ID=ID)
         id = session.get("user_id")
         user_id = id
-        db.execute("INSERT INTO customers (user_id, name, lastname, id, id_number, email, phone, day, month, year, gender, date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", user_id, name, lastname, id, idnumber, email, phone, day, month, year, gender, dat)
+        db.execute("INSERT INTO customers (user_id, name, lastname, id, id_number, email, phone, day, month, year, gender, date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", user_id, name, lastname, ids, idnumber, email, phone, day, month, year, gender, dat)
         return redirect("/turnos")
         
     return render_template("order.html", gender=GENDER, ID=ID)
@@ -420,7 +420,10 @@ def stats():
         help = db.execute("SELECT COUNT(*) as count FROM help WHERE date BETWEEN ? AND ?", date, date2)
         loans = db.execute("SELECT COUNT(*) as count FROM loans WHERE date BETWEEN ? AND ?", date, date2)
         payments = db.execute("SELECT COUNT(*) as count FROM payments WHERE date BETWEEN ? AND ?", date, date2)
-        print(total)
+        first = request.form.get("total")
+        if first:
+            rows = db.execute("SELECT * FROM customers WHERE date BETWEEN ? AND ?", date, date2)
+            return render_template("table.html", rows=rows)
         return render_template("stats.html", total=total, withdrawals=withdrawals, advisory=advisory, inquiries=inquiries, help=help, loans=loans, payments=payments)
     return render_template("stats.html")
     
