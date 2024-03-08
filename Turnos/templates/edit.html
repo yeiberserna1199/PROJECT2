@@ -21,7 +21,7 @@
     </nav>
     {% endblock %}
     {% block main %}
-        <form action="/profile" method="post">
+        <form action="/edit" method="get">
             <div class="row align-items-start">
                 <p>  </p>
                 <p>  </p>
@@ -46,37 +46,11 @@
                     <div class="card ">
                         <div class="card-header">
                             <p> </p>
-                            {% for row in rows %}
-                                <div class="d-grid gap-2"> 
-                                    <p>{{row.email}} </p>
-                                    <button class="btn btn-primary" type="submit" name="email" value="1">Edit</button>
-                                </div>
-                                <p> </p>
-                                <hr class="divider">
-                                <p> </p>
-                                <div class="d-grid gap-2"> 
-                                    <input autocomplete="off" autofocus class="form-control m-auto" name="name" placeholder="Name" type="text">
-                                </div>
-                                <p> </p>
-                                <hr class="divider">
-                                <p> </p>
-                                <div class="d-grid gap-2"> 
-                                    <input autocomplete="off" autofocus class="form-control m-auto" name="name" placeholder="Name" type="text">
-                                </div>
-                                <p> </p>
-                                <hr class="divider">
-                                <p> </p>
-                                <div class="d-grid gap-2"> 
-                                    <p> {{row.phone}} </p>
-                                    <button class="btn btn-primary" type="submit" name="phonoe" value="4">Edit</button>
-                                </div>
-                                <p> </p>
-                                <p> </p>
-                                <p> </p>
-                                <p> </p>
-                            {% endfor %}
-                            
-                        <p>  </p>
+                            {% if request.form.get("email") %}
+                                <h2>New Email</h2>
+                                <input autocomplete="off" autofocus class="form-control m-auto" name="email" placeholder="Email" type="text">
+                            {% endif %}
+                            <p>  </p>
                         </div>
                         
                     </div>
