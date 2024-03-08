@@ -447,12 +447,13 @@ def stats():
 
 @app.route("/profile", methods=["GET","POST"])
 def profile(): 
+    email = request.form.get("email")
+    rows = db.execute("SELECT * FROM user")
     if request.method == "POST":
-        rows = db.execute("SELECT * FROM user")
-        if request.form.get("email"):
-            return render_template("edit.html")
+        
+        print(rows)
         return render_template("profile.html", rows=rows)
-    return render_template("profile.html")
+    return render_template("profile.html", rows=rows)
     
     
     
