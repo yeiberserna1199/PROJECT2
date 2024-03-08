@@ -21,7 +21,7 @@
     </nav>
     {% endblock %}
     {% block main %}
-        <form action="/edit" method="get">
+        <form action="/edit" method="post">
             <div class="row align-items-start">
                 <p>  </p>
                 <p>  </p>
@@ -47,8 +47,9 @@
                         <div class="card-header">
                             <p> </p>
                             {% if request.form.get("email") %}
-                                <h2>New Email</h2>
+                                <p>{{row.email}} </p>
                                 <input autocomplete="off" autofocus class="form-control m-auto" name="email" placeholder="Email" type="text">
+                                <button class="btn btn-primary" type="submit">Edit</button>
                             {% endif %}
                             <p>  </p>
                         </div>
