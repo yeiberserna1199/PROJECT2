@@ -11,7 +11,7 @@
             <div class="collapse navbar-collapse" id="navbar">
                 
                 <ul class="navbar-nav me-auto mt-2">
-                    <li class="nav-item"><a class="nav-link" href="/home">Back</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/profile">Back</a></li>
                 </ul>
                 <ul class="navbar-nav ms-auto mt-2">
                     <li class="nav-item"><a class="nav-link" href="/logout">Log out</a></li>
@@ -46,11 +46,13 @@
                     <div class="card ">
                         <div class="card-header">
                             <p> </p>
-                            {% if request.form.get("email") %}
+                            
+                            {% for row in rows %}
                                 <p>{{row.email}} </p>
-                                <input autocomplete="off" autofocus class="form-control m-auto" name="email" placeholder="Email" type="text">
+                                <input autocomplete="off" autofocus class="form-control m-auto" name="newemail" placeholder="Email" type="text">
+                                <p>  </p>
                                 <button class="btn btn-primary" type="submit">Edit</button>
-                            {% endif %}
+                            {% endfor %}
                             <p>  </p>
                         </div>
                         
