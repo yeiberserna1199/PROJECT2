@@ -259,7 +259,7 @@ def order():
             if not hospitalname or not hospitallastname or not hospitalemail or not hospitalphone or not hospitalmonth or not hospitalday or not hospitalyear or not hospitalgender or not hospitalids or not hospitalidnumber:
                 error = "Missing Information"
                 return render_template("order.html", gender=GENDER, error=error, ID=ID)
-            db.execute("INSERT INTO hospital_customers (user_id, name, lastname, id, id_number, email, phone, day, month, year, gender, date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", user_id, name, lastname, ids, idnumber, email, phone, day, month, year, gender, dat)
+            db.execute("INSERT INTO hospital_customers (user_id, name, lastname, id, id_number, email, phone, day, month, year, gender, date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", user_id, hospitalname, hospitallastname, hospitalids, hospitalidnumber, hospitalemail, hospitalphone, hospitalday, hospitalmonth, hospitalyear, hospitalgender, dat)
             return redirect("/turnos")
         return redirect("/turnos")
         
