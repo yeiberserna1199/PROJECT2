@@ -93,6 +93,13 @@ def after_request(response):
 
 
 
+def company():
+    id = session.get("user_id")
+    user_id = id
+    rowscompany = db.execute("SELECT * FROM user WHERE id = ?", user_id)
+    companytype = rowscompany[0]["business"]
+    COMPANY = companytype
+    return COMPANY
     
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -249,6 +256,10 @@ def order():
 
 @app.route("/turnos", methods=["GET", "POST"])
 def turnos():
+    sisa = company()
+    print(sisa)
+    if sisa == "Bank":
+        print("comon baby!")
     withdrawals = request.form.get("withdrawals")
     advisory = request.form.get("advisory")
     inquiries = request.form.get("inquiries") 
@@ -448,20 +459,87 @@ def stats():
 @app.route("/profile", methods=["GET","POST"])
 def profile(): 
     email = request.form.get("email")
+    size = request.form.get("size")
     rows = db.execute("SELECT * FROM user")
     if request.method == "POST":
-        
-        print(rows)
-        return render_template("profile.html", rows=rows)
+        if request.form.get("email"):
+            return redirect("/edit")
+        if request.form.get("business"):
+            return redirect("/editbusiness")
+        if request.form.get("size"):
+            return redirect("/editsize")
+        if request.form.get("phone"):
+            return redirect("/editphone")
+        return render_template("edit.html", rows=rows)
     return render_template("profile.html", rows=rows)
-    
-    
-    
-    
 
+@app.route("/edit", methods=["GET","POST"])
+def edit():
+    id = session.get("user_id")
+    user_id = id
+    rows = db.execute("SELECT * FROM user")
+    if request.method == "POST":
+        newemail = request.form.get("newemail")
+        rows = db.execute("SELECT * FROM user")
+        oldemail = rows[0]["email"]
+        print(oldemail)
+        print(newemail)
+        change = db.execute("UPDATE user SET email = ? WHERE email = ?", newemail, oldemail)
+        print(change)
+        return redirect("/profile")
+    return render_template("edit.html", rows=rows)
+
+@app.route("/editbusiness", methods=["GET","POST"])
+def editbusiness():
+    id = session.get("user_id")
+    user_id = id
+    rows = db.execute("SELECT * FROM user")
+    if request.method == "POST":
+        newbusiness = request.form.get("newbusiness")
+        rows = db.execute("SELECT * FROM user")
+        oldbusiness = rows[0]["business"]
+        print(oldbusiness)
+        print(newbusiness)
+        change = db.execute("UPDATE user SET business = ? WHERE business = ?", newbusiness, oldbusiness)
+        print(change)
+        return redirect("/profile")
+    return render_template("editbusiness.html", rows=rows, options=OPTIONS)
+
+@app.route("/editsize", methods=["GET","POST"])
+def editsize():
+    id = session.get("user_id")
+    user_id = id
+    rows = db.execute("SELECT * FROM user")
+    if request.method == "POST":
+        newsize = request.form.get("newsize")
+        rows = db.execute("SELECT * FROM user")
+        oldsize = rows[0]["size"]
+        print(oldsize)
+        print(newsize)
+        change = db.execute("UPDATE user SET size = ? WHERE size = ?", newsize, oldsize)
+        print(change)
+        return redirect("/profile")
+    return render_template("editsize.html", rows=rows, size=SIZE)
+    
+@app.route("/editphone", methods=["GET","POST"])
+def editphone():
+    id = session.get("user_id")
+    user_id = id
+    rows = db.execute("SELECT * FROM user")
+    if request.method == "POST":
+        newphone = request.form.get("newphone")
+        rows = db.execute("SELECT * FROM user")
+        oldphone = rows[0]["phone"]
+        print(oldphone)
+        print(newphone)
+        change = db.execute("UPDATE user SET phone = ? WHERE phone = ?", newphone, oldphone)
+        print(change)
+        return redirect("/profile")
+    return render_template("editphone.html", rows=rows)
 
     
     
-
+    
+    
 
 ### menu/staff to make the part of the staff that say next turn and alll that shit ###
