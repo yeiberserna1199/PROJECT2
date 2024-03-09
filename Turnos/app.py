@@ -5,7 +5,8 @@ from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-from datetime import date, datetime
+from datetime import date
+import datetime
 from functools import wraps
 from itsdangerous import URLSafeTimedSerializer as Serializer
 
@@ -171,6 +172,7 @@ def register():
         rows = db.execute("SELECT * FROM user WHERE email = ?", email)
         session["user_id"] = rows[0]["id"]
         print(session["user_id"])
+        return redirect("/home")
     return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION)
 ###se mantiene asi por el momento porque aun no he hecho el homepage luego de subcribirse ni loguearse.### 
 
@@ -288,14 +290,14 @@ def turnos():
         user_id = id
         if emergency:
             print(TURNOS[0])
-            rows = db.execute("SELECT name, lastname, email, phone FROM customers WHERE user_id = ?", user_id)
+            rows = db.execute("SELECT name, lastname, email, phone FROM hospital_customers WHERE user_id = ?", user_id)
             l = len(rows)
             name = rows[l - 1]["name"]
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO emergency (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[0], name, lastname, email, phone, dat)
-            emergency_id = db.execute("SELECT emergency_id FROM emergency")
+            db.execute("INSERT INTO emergency (user_id, turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?,?)", user_id, TURNOS[0], name, lastname, email, phone, dat)
+            emergency_id = db.execute("SELECT emergency_id FROM emergency WHERE user_id = ?", user_id)
             quantity = len(emergency_id)
             new_id = quantity - 1
             turno = db.execute("SELECT turn, name, lastname FROM emergency WHERE emergency_id = ?", emergency_id[new_id]["emergency_id"])
@@ -303,7 +305,91 @@ def turnos():
             if TURNOS[0] == 999:
                 TURNOS[0] = 1
             return render_template("message.html", turno=turno)
-            
+        if service:
+            print(TURNOS[1])
+            rows = db.execute("SELECT name, lastname, email, phone FROM hospital_customers WHERE user_id = ?", user_id)
+            l = len(rows)
+            name = rows[l - 1]["name"]
+            lastname = rows[l - 1]["lastname"]
+            email = rows[l - 1]["email"]
+            phone = rows[l - 1]["phone"]
+            db.execute("INSERT INTO service (user_id, turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?,?)", user_id, TURNOS[1], name, lastname, email, phone, dat)
+            service_id = db.execute("SELECT service_id FROM service WHERE user_id = ?", user_id)
+            quantity = len(service_id)
+            new_id = quantity - 1
+            turno = db.execute("SELECT turn, name, lastname FROM service WHERE service_id = ?", service_id[new_id]["service_id"])
+            TURNOS[1]= TURNOS[1] + 1
+            if TURNOS[1] == 999:
+                TURNOS[1] = 1
+            return render_template("message.html", turno=turno)
+        if urgency:
+            print(TURNOS[2])
+            rows = db.execute("SELECT name, lastname, email, phone FROM hospital_customers WHERE user_id = ?", user_id)
+            l = len(rows)
+            name = rows[l - 1]["name"]
+            lastname = rows[l - 1]["lastname"]
+            email = rows[l - 1]["email"]
+            phone = rows[l - 1]["phone"]
+            db.execute("INSERT INTO urgency (user_id, turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?,?)", user_id, TURNOS[2], name, lastname, email, phone, dat)
+            urgency_id = db.execute("SELECT urgency_id FROM urgency WHERE user_id = ?", user_id)
+            quantity = len(urgency_id)
+            new_id = quantity - 1
+            turno = db.execute("SELECT turn, name, lastname FROM urgency WHERE urgency_id = ?", urgency_id[new_id]["urgency_id"])
+            TURNOS[2]= TURNOS[2] + 1
+            if TURNOS[2] == 999:
+                TURNOS[2] = 1
+            return render_template("message.html", turno=turno)
+        if medical:
+            print(TURNOS[3])
+            rows = db.execute("SELECT name, lastname, email, phone FROM hospital_customers WHERE user_id = ?", user_id)
+            l = len(rows)
+            name = rows[l - 1]["name"]
+            lastname = rows[l - 1]["lastname"]
+            email = rows[l - 1]["email"]
+            phone = rows[l - 1]["phone"]
+            db.execute("INSERT INTO medical (user_id, turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?,?)", user_id, TURNOS[3], name, lastname, email, phone, dat)
+            medical_id = db.execute("SELECT medical_id FROM medical WHERE user_id = ?", user_id)
+            quantity = len(medical_id)
+            new_id = quantity - 1
+            turno = db.execute("SELECT turn, name, lastname FROM medical WHERE medical_id = ?", medical_id[new_id]["medical_id"])
+            TURNOS[3]= TURNOS[3] + 1
+            if TURNOS[3] == 999:
+                TURNOS[3] = 1
+            return render_template("message.html", turno=turno)
+        if drugs:
+            print(TURNOS[4])
+            rows = db.execute("SELECT name, lastname, email, phone FROM hospital_customers WHERE user_id = ?", user_id)
+            l = len(rows)
+            name = rows[l - 1]["name"]
+            lastname = rows[l - 1]["lastname"]
+            email = rows[l - 1]["email"]
+            phone = rows[l - 1]["phone"]
+            db.execute("INSERT INTO drugs (user_id, turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?,?)", user_id, TURNOS[4], name, lastname, email, phone, dat)
+            drugs_id = db.execute("SELECT drugs_id FROM drugs WHERE user_id = ?", user_id)
+            quantity = len(drugs_id)
+            new_id = quantity - 1
+            turno = db.execute("SELECT turn, name, lastname FROM drugs WHERE drugs_id = ?", drugs_id[new_id]["drugs_id"])
+            TURNOS[4]= TURNOS[4] + 1
+            if TURNOS[4] == 999:
+                TURNOS[4] = 1
+            return render_template("message.html", turno=turno)
+        if hospitalhelp:
+            print(TURNOS[5])
+            rows = db.execute("SELECT name, lastname, email, phone FROM hospital_customers WHERE user_id = ?", user_id)
+            l = len(rows)
+            name = rows[l - 1]["name"]
+            lastname = rows[l - 1]["lastname"]
+            email = rows[l - 1]["email"]
+            phone = rows[l - 1]["phone"]
+            db.execute("INSERT INTO hospitalhelp (user_id, turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?,?)", user_id, TURNOS[5], name, lastname, email, phone, dat)
+            hospitalhelp_id = db.execute("SELECT hospitalhelp_id FROM hospitalhelp WHERE user_id = ?", user_id)
+            quantity = len(hospitalhelp_id)
+            new_id = quantity - 1
+            turno = db.execute("SELECT turn, name, lastname FROM hospitalhelp WHERE hospitalhelp_id = ?", hospitalhelp_id[new_id]["hospitalhelp_id"])
+            TURNOS[5]= TURNOS[5] + 1
+            if TURNOS[5] == 999:
+                TURNOS[5] = 1
+            return render_template("message.html", turno=turno)
         if withdrawals:
             print(TURNOS[0])
             rows = db.execute("SELECT name, lastname, email, phone FROM customers WHERE user_id = ?", user_id)
@@ -312,8 +398,8 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO withdrawals (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[0], name, lastname, email, phone, dat)
-            withdrawals_id = db.execute("SELECT withdrawals_id FROM withdrawals")
+            db.execute("INSERT INTO withdrawals (user_id, turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?,?)", user_id, TURNOS[0], name, lastname, email, phone, dat)
+            withdrawals_id = db.execute("SELECT withdrawals_id FROM withdrawals WHERE user_id = ?", user_id)
             quantity = len(withdrawals_id)
             new_id = quantity - 1
             turno = db.execute("SELECT turn, name, lastname FROM withdrawals WHERE withdrawals_id = ?", withdrawals_id[new_id]["withdrawals_id"])
@@ -329,8 +415,8 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO advisory (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[1], name, lastname, email, phone, dat)
-            advisory_id = db.execute("SELECT advisory_id FROM advisory")
+            db.execute("INSERT INTO advisory (user_id, turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?,?)", user_id, TURNOS[1], name, lastname, email, phone, dat)
+            advisory_id = db.execute("SELECT advisory_id FROM advisory WHERE user_id = ?", user_id)
             quantity = len(advisory_id)
             new_id = quantity - 1
             turno = db.execute("SELECT turn, name, lastname FROM advisory WHERE advisory_id = ?", advisory_id[new_id]["advisory_id"])
@@ -346,8 +432,8 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO inquiries (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[2], name, lastname, email, phone, dat)
-            inquiries_id = db.execute("SELECT inquiries_id FROM inquiries")
+            db.execute("INSERT INTO inquiries (user_id, turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?,?)", user_id, TURNOS[2], name, lastname, email, phone, dat)
+            inquiries_id = db.execute("SELECT inquiries_id FROM inquiries WHERE user_id = ?", user_id)
             quantity = len(inquiries_id)
             new_id = quantity - 1
             turno = db.execute("SELECT turn, name, lastname FROM inquiries WHERE inquiries_id = ?", inquiries_id[new_id]["inquiries_id"])
@@ -363,8 +449,8 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO help (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[3], name, lastname, email, phone, dat)
-            help_id = db.execute("SELECT help_id FROM help")
+            db.execute("INSERT INTO help (user_id, turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?,?)", user_id, TURNOS[3], name, lastname, email, phone, dat)
+            help_id = db.execute("SELECT help_id FROM help WHERE user_id = ?", user_id)
             quantity = len(help_id)
             new_id = quantity - 1
             turno = db.execute("SELECT turn, name, lastname FROM help WHERE help_id = ?", help_id[new_id]["help_id"])
@@ -380,8 +466,8 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO loans (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[4], name, lastname, email, phone, dat)
-            loans_id = db.execute("SELECT loans_id FROM loans")
+            db.execute("INSERT INTO loans (user_id, turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?,?)", user_id, TURNOS[4], name, lastname, email, phone, dat)
+            loans_id = db.execute("SELECT loans_id FROM loans WHERE user_id = ?", user_id)
             quantity = len(loans_id)
             new_id = quantity - 1
             turno = db.execute("SELECT turn, name, lastname FROM loans WHERE loans_id = ?", loans_id[new_id]["loans_id"])
@@ -397,8 +483,8 @@ def turnos():
             lastname = rows[l - 1]["lastname"]
             email = rows[l - 1]["email"]
             phone = rows[l - 1]["phone"]
-            db.execute("INSERT INTO payments (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[5], name, lastname, email, phone, dat)
-            payments_id = db.execute("SELECT payments_id FROM payments")
+            db.execute("INSERT INTO payments (user_id, turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?,?)", user_id, TURNOS[5], name, lastname, email, phone, dat)
+            payments_id = db.execute("SELECT payments_id FROM payments WHERE user_id = ?", user_id)
             quantity = len(payments_id)
             new_id = quantity - 1
             turno = db.execute("SELECT turn, name, lastname FROM payments WHERE loans_id = ?", payments_id[new_id]["payments_id"])
@@ -441,6 +527,9 @@ def exit():
 
 @app.route("/stats", methods=["GET", "POST"])
 def stats():
+    id = session.get("user_id")
+    user_id = id
+    sisa = company()
     m = (request.form.get("month"))
     d = (request.form.get("day"))
     y = (request.form.get("year"))
@@ -457,36 +546,64 @@ def stats():
         g = "-"
         date = (year + g + month + g + day)
         date2 = (year2 + g + month2 + g + day2)
-        total = db.execute("SELECT COUNT(*) as count FROM customers WHERE date BETWEEN ? AND ?", date, date2)
-        withdrawals = db.execute("SELECT COUNT(*) as count FROM withdrawals WHERE date BETWEEN ? AND ?", date, date2)
-        advisory = db.execute("SELECT COUNT(*) as count FROM advisory WHERE date BETWEEN ? AND ?", date, date2)
-        inquiries = db.execute("SELECT COUNT(*) as count FROM inquiries WHERE date BETWEEN ? AND ?", date, date2)
-        help = db.execute("SELECT COUNT(*) as count FROM help WHERE date BETWEEN ? AND ?", date, date2)
-        loans = db.execute("SELECT COUNT(*) as count FROM loans WHERE date BETWEEN ? AND ?", date, date2)
-        payments = db.execute("SELECT COUNT(*) as count FROM payments WHERE date BETWEEN ? AND ?", date, date2)
+        hospitaltotal = db.execute("SELECT COUNT(*) as count FROM hospital_customers WHERE date BETWEEN ? AND ? AND user_id = ?", date, date2, user_id)
+        emergency = db.execute("SELECT COUNT(*) as count FROM emergency WHERE date BETWEEN ? AND ? AND user_id = ?", date, date2, user_id)
+        service = db.execute("SELECT COUNT(*) as count FROM service WHERE date BETWEEN ? AND ? AND user_id = ?", date, date2, user_id)
+        urgency = db.execute("SELECT COUNT(*) as count FROM urgency WHERE date BETWEEN ? AND ? AND user_id = ?", date, date2, user_id)
+        medical = db.execute("SELECT COUNT(*) as count FROM medical WHERE date BETWEEN ? AND ? AND user_id = ?", date, date2, user_id)
+        drugs = db.execute("SELECT COUNT(*) as count FROM drugs WHERE date BETWEEN ? AND ? AND user_id = ?", date, date2, user_id)
+        hospitalhelp = db.execute("SELECT COUNT(*) as count FROM hospitalhelp WHERE date BETWEEN ? AND ? AND user_id = ?", date, date2, user_id)
+        total = db.execute("SELECT COUNT(*) as count FROM customers WHERE date BETWEEN ? AND ? AND user_id = ?", date, date2, user_id)
+        withdrawals = db.execute("SELECT COUNT(*) as count FROM withdrawals WHERE date BETWEEN ? AND ? AND user_id = ?", date, date2, user_id)
+        advisory = db.execute("SELECT COUNT(*) as count FROM advisory WHERE date BETWEEN ? AND ? AND user_id = ?", date, date2, user_id)
+        inquiries = db.execute("SELECT COUNT(*) as count FROM inquiries WHERE date BETWEEN ? AND ? AND user_id = ?", date, date2, user_id)
+        help = db.execute("SELECT COUNT(*) as count FROM help WHERE date BETWEEN ? AND ? AND user_id = ?", date, date2, user_id)
+        loans = db.execute("SELECT COUNT(*) as count FROM loans WHERE date BETWEEN ? AND ? AND user_id = ?", date, date2, user_id)
+        payments = db.execute("SELECT COUNT(*) as count FROM payments WHERE date BETWEEN ? AND ? AND user_id = ?", date, date2, user_id)
+        if request.form.get("hospitaltotal"):
+            rows = db.execute("SELECT * FROM hospital_customers WHERE user_id = ?", user_id)
+            return render_template("table.html", rows=rows)
+        if request.form.get("emergency"):
+            rows = db.execute("SELECT * FROM emergency WHERE user_id = ?", user_id)
+            return render_template("table.html", rows=rows)
+        if request.form.get("service"):
+            rows = db.execute("SELECT * FROM service WHERE user_id = ?", user_id)
+            return render_template("table.html", rows=rows)
+        if request.form.get("urgency"):
+            rows = db.execute("SELECT * FROM urgency WHERE user_id = ?", user_id)
+            return render_template("table.html", rows=rows)
+        if request.form.get("medical"):
+            rows = db.execute("SELECT * FROM medical WHERE user_id = ?", user_id)
+            return render_template("table.html", rows=rows)
+        if request.form.get("drugs"):
+            rows = db.execute("SELECT * FROM drugs WHERE user_id = ?", user_id)
+            return render_template("table.html", rows=rows)
+        if request.form.get("hospitalhelp"):
+            rows = db.execute("SELECT * FROM hospitalhelp WHERE user_id = ?", user_id)
+            return render_template("table.html", rows=rows)
         if request.form.get("total"):
-            rows = db.execute("SELECT * FROM customers")
+            rows = db.execute("SELECT * FROM customers WHERE user_id = ?", user_id)
             return render_template("table.html", rows=rows)
         if request.form.get("withdrawals"):
-            rows = db.execute("SELECT * FROM withdrawals")
+            rows = db.execute("SELECT * FROM withdrawals WHERE user_id = ?", user_id)
             return render_template("table.html", rows=rows)
         if request.form.get("advisory"):
-            rows = db.execute("SELECT * FROM advisory")
+            rows = db.execute("SELECT * FROM advisory WHERE user_id = ?", user_id)
             return render_template("table.html", rows=rows)
         if request.form.get("inquiries"):
-            rows = db.execute("SELECT * FROM inquiries")
+            rows = db.execute("SELECT * FROM inquiries WHERE user_id = ?", user_id)
             return render_template("table.html", rows=rows)
         if request.form.get("help"):
-            rows = db.execute("SELECT * FROM help")
+            rows = db.execute("SELECT * FROM help WHERE user_id = ?", user_id)
             return render_template("table.html", rows=rows)
         if request.form.get("loans"):
-            rows = db.execute("SELECT * FROM loans")
+            rows = db.execute("SELECT * FROM loans WHERE user_id = ?", user_id)
             return render_template("table.html", rows=rows)
         if request.form.get("payments"):
-            rows = db.execute("SELECT * FROM payments")
+            rows = db.execute("SELECT * FROM payments WHERE user_id = ?", user_id)
             return render_template("table.html", rows=rows)
-        return render_template("stats.html", total=total, withdrawals=withdrawals, advisory=advisory, inquiries=inquiries, help=help, loans=loans, payments=payments)
-    return render_template("stats.html")
+        return render_template("stats.html", total=total, withdrawals=withdrawals, advisory=advisory, inquiries=inquiries, help=help, loans=loans, payments=payments, hospitaltotal=hospitaltotal, emergency=emergency, service=service, urgency=urgency, medical=medical, drugs=drugs, hospitalhelp=hospitalhelp, sisa=sisa)
+    return render_template("stats.html", sisa=sisa)
 
 
 @app.route("/profile", methods=["GET","POST"])
