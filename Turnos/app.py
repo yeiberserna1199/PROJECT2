@@ -174,7 +174,6 @@ def register():
         print(session["user_id"])
         return redirect("/home")
     return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION)
-###se mantiene asi por el momento porque aun no he hecho el homepage luego de subcribirse ni loguearse.### 
 
 @app.route("/forgot", methods=["GET", "POST"])
 def forgot():
