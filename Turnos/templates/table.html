@@ -33,6 +33,83 @@
             </tr>
         </thead>
         <tbody>
+            {% if request.form.get("hospitaltotal") %}
+                {% for row in rows %}
+                    <tr>
+                        <td class="text-start">{{row.name}}</td>
+                        <td class="text-end">{{row.lastname}}</td>
+                        <td class="text-end">{{row.email}}</td>
+                        <td class="text-end">{{row.phone}}</td>
+                        <td class="text-end">{{row.date}}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            {% if request.form.get("emergency") %}
+                {% for row in rows %}
+                    <tr>
+                        <td class="text-start">{{row.name}}</td>
+                        <td class="text-end">{{row.lastname}}</td>
+                        <td class="text-end">{{row.email}}</td>
+                        <td class="text-end">{{row.phone}}</td>
+                        <td class="text-end">{{row.date}}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            {% if request.form.get("service") %}
+                {% for row in rows %}
+                    <tr>
+                        <td class="text-start">{{row.name}}</td>
+                        <td class="text-end">{{row.lastname}}</td>
+                        <td class="text-end">{{row.email}}</td>
+                        <td class="text-end">{{row.phone}}</td>
+                        <td class="text-end">{{row.date}}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            {% if request.form.get("urgency") %}
+                {% for row in rows %}
+                    <tr>
+                        <td class="text-start">{{row.name}}</td>
+                        <td class="text-end">{{row.lastname}}</td>
+                        <td class="text-end">{{row.email}}</td>
+                        <td class="text-end">{{row.phone}}</td>
+                        <td class="text-end">{{row.date}}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            {% if request.form.get("medical") %}
+                {% for row in rows %}
+                    <tr>
+                        <td class="text-start">{{row.name}}</td>
+                        <td class="text-end">{{row.lastname}}</td>
+                        <td class="text-end">{{row.email}}</td>
+                        <td class="text-end">{{row.phone}}</td>
+                        <td class="text-end">{{row.date}}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            {% if request.form.get("drugs") %}
+                {% for row in rows %}
+                    <tr>
+                        <td class="text-start">{{row.name}}</td>
+                        <td class="text-end">{{row.lastname}}</td>
+                        <td class="text-end">{{row.email}}</td>
+                        <td class="text-end">{{row.phone}}</td>
+                        <td class="text-end">{{row.date}}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            {% if request.form.get("hospitalhelp") %}
+                {% for row in rows %}
+                    <tr>
+                        <td class="text-start">{{row.name}}</td>
+                        <td class="text-end">{{row.lastname}}</td>
+                        <td class="text-end">{{row.email}}</td>
+                        <td class="text-end">{{row.phone}}</td>
+                        <td class="text-end">{{row.date}}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
             {% if request.form.get("total") %}
                 {% for row in rows %}
                     <tr>
