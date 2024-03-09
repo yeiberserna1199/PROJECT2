@@ -190,15 +190,6 @@ def forgot():
             error = "password and new password are not the same!"
             return render_template("forgot.html", question=QUESTION, error=error)
         rows = db.execute("SELECT * FROM user WHERE email = ?", email)
-        print(rows[0]["email"])
-        print(email)
-        print(rows[0]["phone"])
-        print(phone)
-        print(rows[0]["security"])
-        print(security)
-        print(rows[0]["answer"])
-        print(answer)
-        
         if email != rows[0]["email"]:
             error = "information mismatch!"
             print("1")
@@ -232,6 +223,18 @@ def home():
 
 @app.route("/order", methods=["GET", "POST"])
 def order():
+    sisa = company()
+    hospitalname = str(request.form.get("hospitalname")).capitalize()
+    hospitallastname = str(request.form.get("hospitallastname")).capitalize()
+    hospitalids = request.form.get("hospitalid")
+    hospitalidnumber = request.form.get("hospitalidnumber")
+    hospitalemail = request.form.get("hospitalemail")
+    hospitalphone = request.form.get("hospitalphone")
+    hospitalmonth = request.form.get("hospitalmonth")
+    hospitalday = request.form.get("hospitalday")
+    hospitalyear = request.form.get("hospitalyear")
+    hospitalgender = request.form.get("hospitalgender")
+    
     name = str(request.form.get("name")).capitalize()
     lastname = str(request.form.get("lastname")).capitalize()
     ids = request.form.get("id")
@@ -244,22 +247,34 @@ def order():
     gender = request.form.get("gender")
     dat = date.today()
     if request.method == "POST":
-        if not name or not lastname or not email or not phone or not month or not day or not year or not gender or not ids or not idnumber:
-            error = "Missing Information"
-            return render_template("order.html", gender=GENDER, error=error, ID=ID)
         id = session.get("user_id")
         user_id = id
-        db.execute("INSERT INTO customers (user_id, name, lastname, id, id_number, email, phone, day, month, year, gender, date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", user_id, name, lastname, ids, idnumber, email, phone, day, month, year, gender, dat)
+        if sisa == "Bank":
+            if not name or not lastname or not email or not phone or not month or not day or not year or not gender or not ids or not idnumber:
+                error = "Missing Information"
+                return render_template("order.html", gender=GENDER, error=error, ID=ID)
+            db.execute("INSERT INTO customers (user_id, name, lastname, id, id_number, email, phone, day, month, year, gender, date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", user_id, name, lastname, ids, idnumber, email, phone, day, month, year, gender, dat)
+            return redirect("/turnos")
+        if sisa == "Hospital":
+            if not hospitalname or not hospitallastname or not hospitalemail or not hospitalphone or not hospitalmonth or not hospitalday or not hospitalyear or not hospitalgender or not hospitalids or not hospitalidnumber:
+                error = "Missing Information"
+                return render_template("order.html", gender=GENDER, error=error, ID=ID)
+            db.execute("INSERT INTO hospital_customers (user_id, name, lastname, id, id_number, email, phone, day, month, year, gender, date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", user_id, name, lastname, ids, idnumber, email, phone, day, month, year, gender, dat)
+            return redirect("/turnos")
         return redirect("/turnos")
         
-    return render_template("order.html", gender=GENDER, ID=ID)
+    return render_template("order.html", gender=GENDER, ID=ID, sisa=sisa)
 
 @app.route("/turnos", methods=["GET", "POST"])
 def turnos():
     sisa = company()
-    print(sisa)
-    if sisa == "Bank":
-        print("comon baby!")
+    emergency = request.form.get("emergency")
+    service = request.form.get("service")
+    urgency = request.form.get("urgency") 
+    medical = request.form.get("medical")
+    drugs = request.form.get("drugs")
+    hospitalhelp = request.form.get("hospitalhelp")
+    
     withdrawals = request.form.get("withdrawals")
     advisory = request.form.get("advisory")
     inquiries = request.form.get("inquiries") 
@@ -271,6 +286,24 @@ def turnos():
     if request.method == "POST":
         id = session.get("user_id")
         user_id = id
+        if emergency:
+            print(TURNOS[0])
+            rows = db.execute("SELECT name, lastname, email, phone FROM customers WHERE user_id = ?", user_id)
+            l = len(rows)
+            name = rows[l - 1]["name"]
+            lastname = rows[l - 1]["lastname"]
+            email = rows[l - 1]["email"]
+            phone = rows[l - 1]["phone"]
+            db.execute("INSERT INTO emergency (turn, name, lastname, email, phone, date) VALUES(?,?,?,?,?,?)", TURNOS[0], name, lastname, email, phone, dat)
+            emergency_id = db.execute("SELECT emergency_id FROM emergency")
+            quantity = len(emergency_id)
+            new_id = quantity - 1
+            turno = db.execute("SELECT turn, name, lastname FROM emergency WHERE emergency_id = ?", emergency_id[new_id]["emergency_id"])
+            TURNOS[0]= TURNOS[0] + 1
+            if TURNOS[0] == 999:
+                TURNOS[0] = 1
+            return render_template("message.html", turno=turno)
+            
         if withdrawals:
             print(TURNOS[0])
             rows = db.execute("SELECT name, lastname, email, phone FROM customers WHERE user_id = ?", user_id)
@@ -373,7 +406,7 @@ def turnos():
             if TURNOS[5] == 999:
                 TURNOS[5] = 1
             return render_template("message.html", turno=turno)
-    return render_template("turnos.html")
+    return render_template("turnos.html", sisa=sisa)
 
 
 @app.route("/logout")
