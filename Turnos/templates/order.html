@@ -24,6 +24,7 @@
         <form action="/order" method="post">
             <div class="row align-items-start">
             </div>
+            {% if sisa == "Bank" %}
             <div class="row align-items-center">
                 <div class="col">
                     <div class="card ">
@@ -101,5 +102,85 @@
                     
                 </div>
             </div>
+            {% endif %}
+            {% if sisa == "Hospital" %}
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <p> </p>
+                            <input autocomplete="off" autofocus class="form-control m-auto" name="hospitalname" placeholder="Name" type="text">
+                            <p> </p>
+                            <p> </p>
+                            <input autocomplete="off" autofocus class="form-control m-auto" name="hospitallastname" placeholder="Lastname" type="text">
+                            <p> </p>
+                            <p> </p>
+                            <div class="col">
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="hospitalid">
+                                    <option selected disabled>ID</option>
+                                    {% for i in ID %}
+                                        <option value="{{ i }}" >{{i}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            </div>
+                            <p>  </p>
+                            <p>  </p>
+                            <input autocomplete="off" autofocus class="form-control m-auto" name="hospitalidnumber" placeholder="ID Number" type="number">
+                            <p> </p>
+                            <p> </p>
+                            <input autocomplete="off" autofocus class="form-control m-auto" name="hospitalemail" placeholder="Email" type="text">
+                            <p> </p>
+                            <p> </p>
+                            <input class="form-control m-auto" name="hospitalphone" placeholder="Phone" type="numeric">
+                            <p> </p>
+                            <p> </p>
+                            <div class="row">
+                                <div class="col">
+                                    <input autocomplete="off" class="form-control m-auto" autofocus name="hospitalmonth" placeholder="DOB MM" type="number" min="1" max="12">
+                                </div>
+                                <div class="col">
+                                    <input autocomplete="off" class="form-control m-auto" autofocus name="hospitalday" placeholder="DOB DD" type="number" min="1" max="31">
+                                </div>
+                                <div class="col">
+                                    <input autocomplete="off" class="form-control m-auto" autofocus name="hospitalyear" placeholder="DOB YYYY" type="number" min="1950" max="2024">
+                                </div>
+                            </div>
+                            <p>  </p>
+                            <p>  </p>
+                            <div class="col">
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="hospitalgender">
+                                    <option selected disabled>Gender</option>
+                                    {% for gend in gender %}
+                                        <option value="{{ gend }}" >{{gend}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            </div>
+                            <p>  </p>
+                            <p>  </p>
+                            <input type="checkbox" value="" aria-label="" required> <small>Accepting Terms & Conditions</small>
+                            <p>  </p>
+                            <p>  </p>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="static/turno.png">
+                    <p>  </p>
+                    <h1>Please Complete The Form!</h1>
+                    <p>It's Quick And Easy!</p>
+                    <p>  </p>
+                    <p>  </p>
+                    {% if error %}
+                        <p class=error><strong>Error:</strong> {{ error }}
+                    {% endif %}
+                    
+                </div>
+            </div>
+            {% endif %}
         </form>
     {% endblock %}
