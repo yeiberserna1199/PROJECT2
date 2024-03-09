@@ -122,7 +122,6 @@ def login():
         print("logged in")
         return redirect("/home")
     return render_template("homepage.html")
-###se mantiene asi por el momento porque aun no he hecho el homepage luego de subcribirse ni loguearse.### 
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
