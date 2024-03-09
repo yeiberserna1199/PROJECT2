@@ -13,6 +13,7 @@
             </script>
             <div class="row align-items-start">
             </div>
+            {% if sisa == "Bank" %}
             <div class="row align-items-center">
                 <div class="col">
                     <div class="card ">
@@ -93,5 +94,88 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
+            {% if sisa == "Hospital" %}
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <p> </p>
+                            <div class="card">
+                                <h1>Emergency</h1>
+                                <button class="btn btn-primary" type="submit" name="emergency" value="1">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <p> </p>
+                            <div class="card">
+                                <h1>Service Post Emergency</h1>
+                                <button class="btn btn-primary" type="submit" name="service" value="2">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>  </p>
+            <p>  </p>
+            <p>  </p>
+            <p>  </p>
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <p> </p>
+                            <div class="card">
+                                <h1>Urgency</h1>
+                                <button class="btn btn-primary" type="submit" name="urgency" value="3">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <p> </p>
+                            <div class="card">
+                                <h1>Medical Appoiment</h1>
+                                <button class="btn btn-primary" type="submit" name="medical" value="4">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>  </p>
+            <p>  </p>
+            <p>  </p>
+            <p>  </p>
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <p> </p>
+                            <div class="card">
+                                <h1>Drugs</h1>
+                                <button class="btn btn-primary" type="submit" name="drugs" value="5">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <p> </p>
+                            <div class="card">
+                                <h1>Help</h1>
+                                <button class="btn btn-primary" type="submit" name="hospitalhelp" value="6">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
         </form>
     {% endblock %}
