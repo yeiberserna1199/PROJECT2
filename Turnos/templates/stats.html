@@ -23,6 +23,7 @@
     {% endblock %}
     {% block main %}
         <form action="/stats" method="post">
+            {% if sisa == "Bank" %}
             <div class="row align-items-start">
                 
                 <div class="col">
@@ -182,5 +183,167 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
+            {% if sisa == "Hospital" %}
+            <div class="row align-items-start">
+                
+                <div class="col">
+                    <h5>From</h5>
+                </div>
+                <div class="col">
+                    
+                    <input autocomplete="off" class="form-control m-auto" size="number" autofocus name="month" placeholder="MM" type="number" min="1" max="12">
+                </div>
+                <div class="col">
+                    <input autocomplete="off" class="form-control m-auto" size="number" autofocus name="day" placeholder="DD" type="number" min="1" max="31">
+                </div>
+                <div class="col">
+                    <input autocomplete="off" class="form-control m-auto" size="number" autofocus name="year" placeholder="YYYY" type="number" min="1950" max="2024">
+                </div>
+                
+                <div class="col">
+                    <h5>To</h5>
+                </div>
+                <div class="col">
+                    <input autocomplete="off" class="form-control m-auto" size="number" autofocus name="month2" placeholder="MM" type="number" min="1" max="12">
+                </div>
+                <div class="col">
+                    <input autocomplete="off" class="form-control m-auto" size="number" autofocus name="day2" placeholder="DD" type="number" min="1" max="31">
+                </div>
+                <div class="col">
+                    <input autocomplete="off" class="form-control m-auto" size="number" autofocus name="year2" placeholder="YYYY" type="number" min="1950" max="2024">
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary" type="submit">Continue</button>
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <div>
+                                <h5>Total:</h5>
+                                {% for hospitaltot in hospitaltotal %}
+                                    <h3>{{hospitaltot.count}} </h3>
+                                {% endfor %}
+                            </div>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit" name="hospitaltotal" value="1">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>  </p>
+            <p>  </p>
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <div>
+                                <h5>Emergency:</h5>
+                                {% for emer in emergency %}
+                                    <h3>{{emer.count}} </h3>
+                                {% endfor %}
+                            </div>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit" name="emergency" value="2">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <div>
+                                <h5>Service Post Emergency:</h5>
+                                {% for serv in service %}
+                                    <h3>{{serv.count}} </h3>
+                                {% endfor %}
+                            </div>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit" name="service" value="3">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <div>
+                                <h5>Urgency:</h5>
+                                {% for urgen in urgency %}
+                                    <h3>{{urgen.count}} </h3>
+                                {% endfor %}
+                            </div>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit" name="urgency" value="4">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>  </p>
+            <p>  </p>
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <div>
+                                <h5>Medical Appoiment:</h5>
+                                {% for med in medical %}
+                                    <h3>{{med.count}} </h3>
+                                {% endfor %}
+                            </div>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit" name="medical" value="5">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <div>
+                                <h5>Drugs:</h5>
+                                {% for drug in drugs %}
+                                    <h3>{{drug.count}} </h3>
+                                {% endfor %}
+                            </div>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit" name="drugs" value="6">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-header">
+                            <div>
+                                <h5>Help:</h5>
+                                {% for help in hospitalhelp %}
+                                    <h3>{{help.count}} </h3>
+                                {% endfor %}
+                            </div>
+                            <hr class="divider">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit" name="hospitalhelp" value="7">Continue</button>
+                            </div>
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
         </form>
     {% endblock %}
