@@ -686,6 +686,8 @@ def editphone():
     return render_template("editphone.html", rows=rows)
 
     
+@app.route("/staff", methods=["GET", "POST"])
+def staff():
     
     
     
