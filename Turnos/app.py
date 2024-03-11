@@ -13,8 +13,27 @@ from itsdangerous import URLSafeTimedSerializer as Serializer
 
 app = Flask(__name__)
 
+CUBICLE = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"]
+
+BANK = [
+    "Withdrawals",
+    "Advisory",
+    "Inquiries",
+    "Help",
+    "Loans",
+    "Payments"
+]
+
+HOSPITAL = [
+    "Emergency",
+    "Service Post Emergency",
+    "Urgency",
+    "Medical Appoiment",
+    "Drugs",
+    "General Help"
+]
+
 OPTIONS = [
-    "Restaurant",
     "Bank",
     "Hospital"
 ]
@@ -606,9 +625,11 @@ def stats():
 
 @app.route("/profile", methods=["GET","POST"])
 def profile(): 
+    id = session.get("user_id")
+    user_id = id
     email = request.form.get("email")
     size = request.form.get("size")
-    rows = db.execute("SELECT * FROM user")
+    rows = db.execute("SELECT * FROM user WHERE id = ?", user_id)
     if request.method == "POST":
         if request.form.get("email"):
             return redirect("/edit")
@@ -625,14 +646,14 @@ def profile():
 def edit():
     id = session.get("user_id")
     user_id = id
-    rows = db.execute("SELECT * FROM user")
+    rows = db.execute("SELECT * FROM user WHERE id = ?", user_id)
     if request.method == "POST":
         newemail = request.form.get("newemail")
-        rows = db.execute("SELECT * FROM user")
+        rows = db.execute("SELECT * FROM user WHERE id = ?", user_id)
         oldemail = rows[0]["email"]
         print(oldemail)
         print(newemail)
-        change = db.execute("UPDATE user SET email = ? WHERE email = ?", newemail, oldemail)
+        change = db.execute("UPDATE user SET email = ? WHERE email = ? AND id = ?", newemail, oldemail, user_id)
         print(change)
         return redirect("/profile")
     return render_template("edit.html", rows=rows)
@@ -641,14 +662,14 @@ def edit():
 def editbusiness():
     id = session.get("user_id")
     user_id = id
-    rows = db.execute("SELECT * FROM user")
+    rows = db.execute("SELECT * FROM user WHERE id = ?", user_id)
     if request.method == "POST":
         newbusiness = request.form.get("newbusiness")
-        rows = db.execute("SELECT * FROM user")
+        rows = db.execute("SELECT * FROM user WHERE id = ?", user_id)
         oldbusiness = rows[0]["business"]
         print(oldbusiness)
         print(newbusiness)
-        change = db.execute("UPDATE user SET business = ? WHERE business = ?", newbusiness, oldbusiness)
+        change = db.execute("UPDATE user SET business = ? WHERE business = ? AND id = ?", newbusiness, oldbusiness, user_id)
         print(change)
         return redirect("/profile")
     return render_template("editbusiness.html", rows=rows, options=OPTIONS)
@@ -657,14 +678,14 @@ def editbusiness():
 def editsize():
     id = session.get("user_id")
     user_id = id
-    rows = db.execute("SELECT * FROM user")
+    rows = db.execute("SELECT * FROM user WHERE id = ?", user_id)
     if request.method == "POST":
         newsize = request.form.get("newsize")
-        rows = db.execute("SELECT * FROM user")
+        rows = db.execute("SELECT * FROM user WHERE id = ?", user_id)
         oldsize = rows[0]["size"]
         print(oldsize)
         print(newsize)
-        change = db.execute("UPDATE user SET size = ? WHERE size = ?", newsize, oldsize)
+        change = db.execute("UPDATE user SET size = ? WHERE size = ? AND id = ?", newsize, oldsize, user_id)
         print(change)
         return redirect("/profile")
     return render_template("editsize.html", rows=rows, size=SIZE)
@@ -673,14 +694,14 @@ def editsize():
 def editphone():
     id = session.get("user_id")
     user_id = id
-    rows = db.execute("SELECT * FROM user")
+    rows = db.execute("SELECT * FROM user WHERE id = ?", user_id)
     if request.method == "POST":
         newphone = request.form.get("newphone")
-        rows = db.execute("SELECT * FROM user")
+        rows = db.execute("SELECT * FROM user WHERE id = ?", user_id)
         oldphone = rows[0]["phone"]
         print(oldphone)
         print(newphone)
-        change = db.execute("UPDATE user SET phone = ? WHERE phone = ?", newphone, oldphone)
+        change = db.execute("UPDATE user SET phone = ? WHERE phone = ? AND id = ?", newphone, oldphone, user_id)
         print(change)
         return redirect("/profile")
     return render_template("editphone.html", rows=rows)
@@ -688,8 +709,24 @@ def editphone():
     
 @app.route("/staff", methods=["GET", "POST"])
 def staff():
+    id = session.get("user_id")
+    user_id = id
+    sisa = company()
+    staff = "Ok"
+    if request.method == "POST":    
+        spot = str(request.form.get("cubicle").casefold())
+        queu = str(request.form.get("queu").casefold())
+        if queu == "service post emergency":
+            queu = "service"
+        if queu == "medical appoiment":
+            queu = "medical"
+        if queu == "General Help":
+            queu = "hospitalhelp"
+        rows = db.execute("SELECT name, lastname, turn FROM ? WHERE user_id = ?", queu, user_id)
+        return render_template("staff.html", staff=staff, rows=rows)
+    return render_template("staff.html", cubicle=CUBICLE, sisa=sisa, bank=BANK, hospital=HOSPITAL)
     
     
     
-
+###missing: we need that after the staff choose their spot and queu, they can click on next and the next cx information and turn reflected in the screen###
 ### menu/staff to make the part of the staff that say next turn and alll that shit ###
