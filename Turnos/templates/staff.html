@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+    {% block title %}
+        
+    {% endblock %}
+    {% block house %} 
+    <nav class="bg-light border navbar navbar-expand-md navbar-light">
+        <div class="container-fluid">
+            <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                
+                <ul class="navbar-nav me-auto mt-2">
+                    <li class="nav-item"><a class="nav-link" href="/home">Back</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto mt-2">
+                    <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    {% endblock %}
+    {% block main %}
+        <form action="/staff" method="post">
+            {% if sisa %}
+                <div class="row align-items-start">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="col">
+                                <h5>Select Your Cubicle!</h5>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="cubicle">
+                                    <option selected disabled>Cubicle</option>
+                                    {% for cubi in cubicle %}
+                                        <option value="{{ cubi }}" >{{cubi}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            </div>
+                            <p>  </p>
+                            <p>  </p>
+                            {% if sisa == "Bank" %}
+                            <div class="col">
+                                <h5>Select Your Queu!</h5>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu">
+                                    <option selected disabled>Queu</option>
+                                    {% for ban in bank %}
+                                        <option value="{{ ban }}" >{{ban}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            </div>
+                            {% endif %}
+                            {% if sisa == "Hospital" %}
+                                <div class="col">
+                                    <h5>Select Your Queu!</h5>
+                                    <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu">
+                                        <option selected disabled>Queu</option>
+                                        {% for hos in hospital %}
+                                            <option value="{{ hos }}" >{{hos}}</option>
+                                        {% endfor %}</li>
+                                    </select>
+                                </div>
+                            {% endif %}
+                            <p>  </p>
+                            <hr class="divider">
+                            <p>  </p>
+                            <button class="btn btn-primary" type="submit">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if staff %}
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <button class="btn btn-primary" type="submit" name="prev" value="-1">Previous</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <button class="btn btn-primary" type="submit" name="next" value="1">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    {% for row in rows %}
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h1>{{row.turn}} </h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Name: {{row.name}}</h5>
+                                </div>
+                                <div class="card-footer">
+                                    <h5>Last Name: {{row.lastname}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </form>
+    {% endblock %}
