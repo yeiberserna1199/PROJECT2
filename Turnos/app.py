@@ -712,20 +712,28 @@ def staff():
     id = session.get("user_id")
     user_id = id
     sisa = company()
-    staff = "Ok"
+    staf = "Ok"
     if request.method == "POST":    
-        spot = str(request.form.get("cubicle").casefold())
-        queu = str(request.form.get("queu").casefold())
-        if queu == "service post emergency":
-            queu = "service"
-        if queu == "medical appoiment":
-            queu = "medical"
-        if queu == "General Help":
-            queu = "hospitalhelp"
-        rows = db.execute("SELECT name, lastname, turn FROM ? WHERE user_id = ?", queu, user_id)
-        return render_template("staff.html", staff=staff, rows=rows)
+        staff.spot = request.form.get("cubicle")
+        staff.queu = request.form.get("queu")
+        return redirect("/numero")
     return render_template("staff.html", cubicle=CUBICLE, sisa=sisa, bank=BANK, hospital=HOSPITAL)
     
+@app.route("/numero", methods=["GET", "POST"])
+def numero():
+    if request.method == "POST":
+        spot = staff.spot
+        queu = staff.queu
+        print(spot)
+        print(queu)
+        turno = 0
+        next = request.form.get("next")
+        if next:
+            add = 1
+            turno = turno + add
+            print(turno)
+        return render_template("numero.html", turno=turno, spot=spot, queu=queu)
+    return render_template("numero.html")
     
     
 ###missing: we need that after the staff choose their spot and queu, they can click on next and the next cx information and turn reflected in the screen###
