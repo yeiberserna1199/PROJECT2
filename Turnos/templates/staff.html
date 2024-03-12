@@ -68,44 +68,5 @@
                     </div>
                 </div>
             {% endif %}
-            {% if staff %}
-                <div class="row align-items-center">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-header">
-                                <button class="btn btn-primary" type="submit" name="prev" value="-1">Previous</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-header">
-                                <button class="btn btn-primary" type="submit" name="next" value="1">Next</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row align-items-center">
-                    {% for row in rows %}
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h1>{{row.turn}} </h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Name: {{row.name}}</h5>
-                                </div>
-                                <div class="card-footer">
-                                    <h5>Last Name: {{row.lastname}}</h5>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
         </form>
     {% endblock %}
