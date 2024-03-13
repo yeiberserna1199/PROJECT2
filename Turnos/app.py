@@ -82,7 +82,7 @@ ID = [
 ]
 
 TURNOS = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-
+STAFFTURNOS = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0]
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -722,17 +722,18 @@ def staff():
 @app.route("/numero", methods=["GET", "POST"])
 def numero():
     if request.method == "POST":
-        spot = staff.spot
+        spot = int(staff.spot)
         queu = staff.queu
         print(spot)
         print(queu)
-        turno = 0
         next = request.form.get("next")
         if next:
-            add = 1
-            turno = turno + add
-            print(turno)
-        return render_template("numero.html", turno=turno, spot=spot, queu=queu)
+            STAFFTURNOS[spot-1] = STAFFTURNOS[spot-1] + 1
+            numero.tunos = STAFFTURNOS[spot-1]
+            if STAFFTURNOS[spot-1] == 999:
+                STAFFTURNOS[spot-1] = 0
+            print(STAFFTURNOS[spot-1])
+        return render_template("numero.html", turno=STAFFTURNOS[spot-1], spot=spot, queu=queu)
     return render_template("numero.html")
     
     
