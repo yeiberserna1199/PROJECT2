@@ -1,0 +1,221 @@
+{% extends "layout.html" %}
+    {% block title %}
+        
+    {% endblock %}
+    {% block house %} 
+    <nav class="bg-light border navbar navbar-expand-md navbar-light">
+        <div class="container-fluid">
+            <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                
+                <ul class="navbar-nav me-auto mt-2">
+                    <li class="nav-item"><a class="nav-link" href="/home">Back</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto mt-2">
+                    <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    {% endblock %}
+    {% block main %}
+        <form action="/screen" method="post">
+            <script>
+                function autoRefresh() {
+                    window.location = window.location.href;
+                }
+                setInterval('autoRefresh()', 3000);
+            </script>
+            <div class="row align-items-start">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 1</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot1}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 2</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot2}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 3</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot3}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 4</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot4}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 5</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot5}} </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 6</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot6}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 7</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot7}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 8</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot8}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 9</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot9}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 10</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot10}} </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 11</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot11}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 12</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot12}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 13</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot13}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 14</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot14}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 15</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot15}} </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 16</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot16}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 17</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot17}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 18</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot18}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 19</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot19}} </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Spot 20</h3>
+                            <h3>Turn</h3>
+                            <h3>{{spot20}} </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    {% endblock %}
