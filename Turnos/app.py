@@ -735,6 +735,11 @@ def numero():
             print(STAFFTURNOS[spot-1])
         return render_template("numero.html", turno=STAFFTURNOS[spot-1], spot=spot, queu=queu)
     return render_template("numero.html")
+
+@app.route("/screen", methods=["GET", "POST"])
+def screen():
+    return render_template("screen.html", spot1=STAFFTURNOS[0], spot2=STAFFTURNOS[1], spot3=STAFFTURNOS[2], spot4=STAFFTURNOS[3], spot5=STAFFTURNOS[4], spot6=STAFFTURNOS[5], spot7=STAFFTURNOS[6], spot8=STAFFTURNOS[7], spot9=STAFFTURNOS[8], spot10=STAFFTURNOS[9], spot11=STAFFTURNOS[10], spot12=STAFFTURNOS[11], spot13=STAFFTURNOS[12], spot14=STAFFTURNOS[13], spot15=STAFFTURNOS[14], spot16=STAFFTURNOS[15], spot17=STAFFTURNOS[16], spot18=STAFFTURNOS[17], spot19=STAFFTURNOS[18], spot20=STAFFTURNOS[19])
+    
     
     
 ###missing: we need that after the staff choose their spot and queu, they can click on next and the next cx information and turn reflected in the screen###
