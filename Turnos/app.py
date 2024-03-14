@@ -13,7 +13,7 @@ from itsdangerous import URLSafeTimedSerializer as Serializer
 
 app = Flask(__name__)
 
-CUBICLE = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"]
+CUBICLE = ["1","2","3","4","5","6","7","8","9","10"]
 
 BANK = [
     "Withdrawals",
@@ -82,7 +82,7 @@ ID = [
 ]
 
 TURNOS = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-STAFFTURNOS = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0]
+STAFFTURNOS = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -716,6 +716,9 @@ def staff():
     if request.method == "POST":    
         staff.spot = request.form.get("cubicle")
         staff.queu = request.form.get("queu")
+        if staff.spot == "1":
+            staff.spot.spot1 = 1
+            staff.queu.spot1 = staff.queu
         return redirect("/numero")
     return render_template("staff.html", cubicle=CUBICLE, sisa=sisa, bank=BANK, hospital=HOSPITAL)
     
