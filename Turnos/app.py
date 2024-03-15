@@ -21,7 +21,8 @@ BANK = [
     "Inquiries",
     "Help",
     "Loans",
-    "Payments"
+    "Payments",
+    "Closed"
 ]
 
 HOSPITAL = [
@@ -30,7 +31,8 @@ HOSPITAL = [
     "Urgency",
     "Medical Appoiment",
     "Drugs",
-    "General Help"
+    "General Help",
+    "Closed"
 ]
 
 OPTIONS = [
@@ -718,96 +720,51 @@ def staff():
     sisa = company()
     staf = "Ok"
     if request.method == "POST":    
-        staff.spot = request.form.get("cubicle")
-        staff.queu = request.form.get("queu")
-        if staff.spot == "1":
-            staff.spot1 = 1
-            staff.queu1 = staff.queu
-        if staff.spot == "2":
-            staff.spot2 = 2
-            staff.queu2 = staff.queu
-        if staff.spot == "3":
-            staff.spot3 = 3
-            staff.queu3 = staff.queu
-        if staff.spot == "4":
-            staff.spot4 = 4
-            staff.queu4 = staff.queu
-        if staff.spot == "5":
-            staff.spot5 = 5
-            staff.queu5 = staff.queu
-        if staff.spot == "6":
-            staff.spot6 = 6
-            staff.queu6 = staff.queu
-        if staff.spot == "7":
-            staff.spot7 = 7
-            staff.queu7 = staff.queu
-        if staff.spot == "8":
-            staff.spot8 = 8
-            staff.queu8 = staff.queu
-        if staff.spot == "9":
-            staff.spot9 = 9
-            staff.queu9 = staff.queu
-        if staff.spot == "10":
-            staff.spot10 = 10
-            staff.queu10 = staff.queu
+        staff.queu1 = request.form.get("queu1")
+        staff.queu2 = request.form.get("queu2")
+        staff.queu3 = request.form.get("queu3")
+        staff.queu4 = request.form.get("queu4")
+        staff.queu5 = request.form.get("queu5")
+        staff.queu6 = request.form.get("queu6")
+        staff.queu7 = request.form.get("queu7")
+        staff.queu8 = request.form.get("queu8")
+        staff.queu9 = request.form.get("queu9")
+        staff.queu10 = request.form.get("queu10")
         return redirect("/numero")
     return render_template("staff.html", cubicle=CUBICLE, sisa=sisa, bank=BANK, hospital=HOSPITAL)
     
 @app.route("/numero", methods=["GET", "POST"])
 def numero():
     if request.method == "POST":
-        if staff.spot == "1":
-            spot1 = int(staff.spot1)
-            queu1 = staff.queu1
-            next = request.form.get("next")
-            if next:
-                STAFFTURNOS[0] = STAFFTURNOS[0] + 1
-                numero.tunos = STAFFTURNOS[0]
-                if STAFFTURNOS[0] == 999:
-                    STAFFTURNOS[0] = 0
-                print(STAFFTURNOS[0])
-                return render_template("numero.html", turno=STAFFTURNOS[0], spot=spot1, queu=queu1, cub=spot1)
-        if staff.spot == "2":
-            spot2 = int(staff.spot2)
-            queu2 = staff.queu2
-            next = request.form.get("next")
-            if next:
-                STAFFTURNOS[1] = STAFFTURNOS[1] + 1
-                numero.tunos = STAFFTURNOS[1]
-                if STAFFTURNOS[1] == 999:
-                    STAFFTURNOS[1] = 0
-                print(STAFFTURNOS[1])
-                return render_template("numero.html", turno=STAFFTURNOS[0], spot=spot2, queu=queu2, cub=spot2)
-        if staff.spot == "3":
-            staff.spot.spot3 = 3
-            staff.queu.spot3 = staff.queu
-        if staff.spot == "4":
-            staff.spot.spot4
-            staff.queu.spot4
-        if staff.spot == "5":
-            staff.spot.spot5 = 5
-            staff.queu.spot5 = staff.queu
-        if staff.spot == "6":
-            staff.spot.spot6 = 6
-            staff.queu.spot6 = staff.queu
-        if staff.spot == "7":
-            staff.spot.spot7 = 7
-            staff.queu.spot7 = staff.queu
-        if staff.spot == "8":
-            staff.spot.spot8 = 8
-            staff.queu.spot8 = staff.queu
-        if staff.spot == "9":
-            staff.spot.spot9 = 9
-            staff.queu.spot9 = staff.queu
-        if staff.spot == "10":
-            staff.spot.spot10 = 10
-            staff.queu.spot10 = staff.queu
-    return render_template("numero.html")
+        return render_template("numero.html")
 
 @app.route("/screen", methods=["GET", "POST"])
 def screen():
     print(STAFFTURNOS)
-    return render_template("screen.html", spot1=STAFFTURNOS[0], spot2=STAFFTURNOS[1], spot3=STAFFTURNOS[2], spot4=STAFFTURNOS[3], spot5=STAFFTURNOS[4], spot6=STAFFTURNOS[5], spot7=STAFFTURNOS[6], spot8=STAFFTURNOS[7], spot9=STAFFTURNOS[8], spot10=STAFFTURNOS[9])
+    sisa = company()
+    if request.method == "POST":
+        if request.form.get("one"):
+            STAFFTURNOS[0] = STAFFTURNOS[0] + 1
+        if request.form.get("two"):
+            STAFFTURNOS[1] = STAFFTURNOS[1] + 1
+        if request.form.get("three"):
+            STAFFTURNOS[2] = STAFFTURNOS[2] + 1
+        if request.form.get("four"):
+            STAFFTURNOS[3] = STAFFTURNOS[3] + 1
+        if request.form.get("five"):
+            STAFFTURNOS[4] = STAFFTURNOS[4] + 1
+        if request.form.get("six"):
+            STAFFTURNOS[5] = STAFFTURNOS[5] + 1
+        if request.form.get("seven"):
+            STAFFTURNOS[6] = STAFFTURNOS[6] + 1
+        if request.form.get("eight"):
+            STAFFTURNOS[7] = STAFFTURNOS[7] + 1
+        if request.form.get("nine"):
+            STAFFTURNOS[8] = STAFFTURNOS[8] + 1
+        if request.form.get("ten"):
+            STAFFTURNOS[9] = STAFFTURNOS[9] + 1
+        
+    return render_template("screen.html", sisa=sisa, bank=BANK, hospital=HOSPITAL, spot1=STAFFTURNOS[0], spot2=STAFFTURNOS[1], spot3=STAFFTURNOS[2], spot4=STAFFTURNOS[3], spot5=STAFFTURNOS[4], spot6=STAFFTURNOS[5], spot7=STAFFTURNOS[6], spot8=STAFFTURNOS[7], spot9=STAFFTURNOS[8], spot10=STAFFTURNOS[9], queu1=staff.queu1, queu2=staff.queu2, queu3=staff.queu3, queu4=staff.queu4, queu5=staff.queu5, queu6=staff.queu6, queu7=staff.queu7, queu8=staff.queu8, queu9=staff.queu9, queu10=staff.queu10)
     
     
     
