@@ -22,51 +22,266 @@
     </nav>
     {% endblock %}
     {% block main %}
-        <form action="/staff" method="post">
-            {% if sisa %}
-                <div class="row align-items-start">
+        <form action="/screen" method="post">
+            
+            <div class="row align-items-start">
+                <div class="col">
                     <div class="card">
                         <div class="card-header">
-                            <div class="col">
-                                <h5>Select Your Cubicle!</h5>
-                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="cubicle">
-                                    <option selected disabled>Cubicle</option>
-                                    {% for cubi in cubicle %}
-                                        <option value="{{ cubi }}" >{{cubi}}</option>
-                                    {% endfor %}</li>
-                                </select>
-                            </div>
-                            <p>  </p>
-                            <p>  </p>
                             {% if sisa == "Bank" %}
-                            <div class="col">
-                                <h5>Select Your Queu!</h5>
-                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu">
+                                <h3>Select Your Queu!</h3>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu1">
                                     <option selected disabled>Queu</option>
                                     {% for ban in bank %}
                                         <option value="{{ ban }}" >{{ban}}</option>
                                     {% endfor %}</li>
                                 </select>
-                            </div>
                             {% endif %}
                             {% if sisa == "Hospital" %}
-                                <div class="col">
-                                    <h5>Select Your Queu!</h5>
-                                    <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu">
-                                        <option selected disabled>Queu</option>
-                                        {% for hos in hospital %}
-                                            <option value="{{ hos }}" >{{hos}}</option>
-                                        {% endfor %}</li>
-                                    </select>
-                                </div>
+                                <h5>Select Your Queu!</h5>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu1">
+                                    <option selected disabled>Queu</option>
+                                    {% for hos in hospital %}
+                                        <option value="{{ hos }}" >{{hos}}</option>
+                                    {% endfor %}</li>
+                                </select>
                             {% endif %}
-                            <p>  </p>
-                            <hr class="divider">
-                            <p>  </p>
-                            <button class="btn btn-primary" type="submit">Continue</button>
+                            <h3>Spot 1</h3>
                         </div>
                     </div>
                 </div>
-            {% endif %}
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            {% if sisa == "Bank" %}
+                                <h3>Select Your Queu!</h3>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu2">
+                                    <option selected disabled>Queu</option>
+                                    {% for ban in bank %}
+                                        <option value="{{ ban }}" >{{ban}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            {% if sisa == "Hospital" %}
+                                <h5>Select Your Queu!</h5>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu2">
+                                    <option selected disabled>Queu</option>
+                                    {% for hos in hospital %}
+                                        <option value="{{ hos }}" >{{hos}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            <h3>Spot 2</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            {% if sisa == "Bank" %}
+                                <h3>Select Your Queu!</h3>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu3">
+                                    <option selected disabled>Queu</option>
+                                    {% for ban in bank %}
+                                        <option value="{{ ban }}" >{{ban}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            {% if sisa == "Hospital" %}
+                                <h5>Select Your Queu!</h5>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu3">
+                                    <option selected disabled>Queu</option>
+                                    {% for hos in hospital %}
+                                        <option value="{{ hos }}" >{{hos}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            <h3>Spot 3</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            {% if sisa == "Bank" %}
+                                <h3>Select Your Queu!</h3>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu4">
+                                    <option selected disabled>Queu</option>
+                                    {% for ban in bank %}
+                                        <option value="{{ ban }}" >{{ban}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            {% if sisa == "Hospital" %}
+                                <h5>Select Your Queu!</h5>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu4">
+                                    <option selected disabled>Queu</option>
+                                    {% for hos in hospital %}
+                                        <option value="{{ hos }}" >{{hos}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            <h3>Spot 4</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            {% if sisa == "Bank" %}
+                                <h3>Select Your Queu!</h3>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu5">
+                                    <option selected disabled>Queu</option>
+                                    {% for ban in bank %}
+                                        <option value="{{ ban }}" >{{ban}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            {% if sisa == "Hospital" %}
+                                <h5>Select Your Queu!</h5>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu5">
+                                    <option selected disabled>Queu</option>
+                                    {% for hos in hospital %}
+                                        <option value="{{ hos }}" >{{hos}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            <h3>Spot 5</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>  </p>
+            <p>  </p>
+            <div class="row align-items-start">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            {% if sisa == "Bank" %}
+                                <h3>Select Your Queu!</h3>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu6">
+                                    <option selected disabled>Queu</option>
+                                    {% for ban in bank %}
+                                        <option value="{{ ban }}" >{{ban}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            {% if sisa == "Hospital" %}
+                                <h5>Select Your Queu!</h5>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu6">
+                                    <option selected disabled>Queu</option>
+                                    {% for hos in hospital %}
+                                        <option value="{{ hos }}" >{{hos}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            <h3>Spot 6</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            {% if sisa == "Bank" %}
+                                <h3>Select Your Queu!</h3>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu7">
+                                    <option selected disabled>Queu</option>
+                                    {% for ban in bank %}
+                                        <option value="{{ ban }}" >{{ban}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            {% if sisa == "Hospital" %}
+                                <h5>Select Your Queu!</h5>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu7">
+                                    <option selected disabled>Queu</option>
+                                    {% for hos in hospital %}
+                                        <option value="{{ hos }}" >{{hos}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            <h3>Spot 7</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            {% if sisa == "Bank" %}
+                                <h3>Select Your Queu!</h3>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu8">
+                                    <option selected disabled>Queu</option>
+                                    {% for ban in bank %}
+                                        <option value="{{ ban }}" >{{ban}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            {% if sisa == "Hospital" %}
+                                <h5>Select Your Queu!</h5>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu8">
+                                    <option selected disabled>Queu</option>
+                                    {% for hos in hospital %}
+                                        <option value="{{ hos }}" >{{hos}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            <h3>Spot 8</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            {% if sisa == "Bank" %}
+                                <h3>Select Your Queu!</h3>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu9">
+                                    <option selected disabled>Queu</option>
+                                    {% for ban in bank %}
+                                        <option value="{{ ban }}" >{{ban}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            {% if sisa == "Hospital" %}
+                                <h5>Select Your Queu!</h5>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu9">
+                                    <option selected disabled>Queu</option>
+                                    {% for hos in hospital %}
+                                        <option value="{{ hos }}" >{{hos}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            <h3>Spot 9</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            {% if sisa == "Bank" %}
+                                <h3>Select Your Queu!</h3>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu10">
+                                    <option selected disabled>Queu</option>
+                                    {% for ban in bank %}
+                                        <option value="{{ ban }}" >{{ban}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            {% if sisa == "Hospital" %}
+                                <h5>Select Your Queu!</h5>
+                                <select class="form-select form-select-auto" aria-label=".form-select-auto example" name="queu10">
+                                    <option selected disabled>Queu</option>
+                                    {% for hos in hospital %}
+                                        <option value="{{ hos }}" >{{hos}}</option>
+                                    {% endfor %}</li>
+                                </select>
+                            {% endif %}
+                            <h3>Spot 10</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
         </form>
     {% endblock %}
