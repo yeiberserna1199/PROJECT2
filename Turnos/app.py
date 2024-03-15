@@ -719,12 +719,69 @@ def staff():
         if staff.spot == "1":
             staff.spot.spot1 = 1
             staff.queu.spot1 = staff.queu
+        if staff.spot == "2":
+            staff.spot.spot2 = 2
+            staff.queu.spot2 = staff.queu
+        if staff.spot == "3":
+            staff.spot.spot3 = 3
+            staff.queu.spot3 = staff.queu
+        if staff.spot == "4":
+            staff.spot.spot4 = 4
+            staff.queu.spot4 = staff.queu
+        if staff.spot == "5":
+            staff.spot.spot5 = 5
+            staff.queu.spot5 = staff.queu
+        if staff.spot == "6":
+            staff.spot.spot6 = 6
+            staff.queu.spot6 = staff.queu
+        if staff.spot == "7":
+            staff.spot.spot7 = 7
+            staff.queu.spot7 = staff.queu
+        if staff.spot == "8":
+            staff.spot.spot8 = 8
+            staff.queu.spot8 = staff.queu
+        if staff.spot == "9":
+            staff.spot.spot9 = 9
+            staff.queu.spot9 = staff.queu
+        if staff.spot == "10":
+            staff.spot.spot10 = 10
+            staff.queu.spot10 = staff.queu
         return redirect("/numero")
     return render_template("staff.html", cubicle=CUBICLE, sisa=sisa, bank=BANK, hospital=HOSPITAL)
     
 @app.route("/numero", methods=["GET", "POST"])
 def numero():
     if request.method == "POST":
+        if staff.spot == "1":
+            staff.spot.spot1
+            staff.queu.spot1
+        if staff.spot == "2":
+            staff.spot.spot2 = 2
+            staff.queu.spot2 = staff.queu
+        if staff.spot == "3":
+            staff.spot.spot3 = 3
+            staff.queu.spot3 = staff.queu
+        if staff.spot == "4":
+            staff.spot.spot4
+            staff.queu.spot4
+        if staff.spot == "5":
+            staff.spot.spot5 = 5
+            staff.queu.spot5 = staff.queu
+        if staff.spot == "6":
+            staff.spot.spot6 = 6
+            staff.queu.spot6 = staff.queu
+        if staff.spot == "7":
+            staff.spot.spot7 = 7
+            staff.queu.spot7 = staff.queu
+        if staff.spot == "8":
+            staff.spot.spot8 = 8
+            staff.queu.spot8 = staff.queu
+        if staff.spot == "9":
+            staff.spot.spot9 = 9
+            staff.queu.spot9 = staff.queu
+        if staff.spot == "10":
+            staff.spot.spot10 = 10
+            staff.queu.spot10 = staff.queu
         spot = int(staff.spot)
         queu = staff.queu
         print(spot)
