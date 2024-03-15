@@ -40,9 +40,16 @@
                 </div>
             </div>
             <div class="row align-items-center">
-                <h1>{{queu}} In Spot:{{spot}} </h1>
-                <h1>Next:</h1>
-                <h1>{{turno}} </h1>
+                {% if cub == 1 %}
+                    <h1>{{queu}} In Spot:{{spot}} </h1>
+                    <h1>Next:</h1>
+                    <h1>{{turno}} </h1>
+                {% endif %}
+                {% if cub == 2 %}
+                    <h1>{{queu}} In Spot:{{spot}} </h1>
+                    <h1>Next:</h1>
+                    <h1>{{turno}} </h1>
+                {% endif %}
             </div>
         </form>
     {% endblock %}
