@@ -84,6 +84,10 @@ ID = [
 TURNOS = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 STAFFTURNOS = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
+PRUEBA1 = 1
+PRUEBA2 = 1
+
+
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
@@ -717,35 +721,35 @@ def staff():
         staff.spot = request.form.get("cubicle")
         staff.queu = request.form.get("queu")
         if staff.spot == "1":
-            staff.spot.spot1 = 1
-            staff.queu.spot1 = staff.queu
+            staff.spot1 = 1
+            staff.queu1 = staff.queu
         if staff.spot == "2":
-            staff.spot.spot2 = 2
-            staff.queu.spot2 = staff.queu
+            staff.spot2 = 2
+            staff.queu2 = staff.queu
         if staff.spot == "3":
-            staff.spot.spot3 = 3
-            staff.queu.spot3 = staff.queu
+            staff.spot3 = 3
+            staff.queu3 = staff.queu
         if staff.spot == "4":
-            staff.spot.spot4 = 4
-            staff.queu.spot4 = staff.queu
+            staff.spot4 = 4
+            staff.queu4 = staff.queu
         if staff.spot == "5":
-            staff.spot.spot5 = 5
-            staff.queu.spot5 = staff.queu
+            staff.spot5 = 5
+            staff.queu5 = staff.queu
         if staff.spot == "6":
-            staff.spot.spot6 = 6
-            staff.queu.spot6 = staff.queu
+            staff.spot6 = 6
+            staff.queu6 = staff.queu
         if staff.spot == "7":
-            staff.spot.spot7 = 7
-            staff.queu.spot7 = staff.queu
+            staff.spot7 = 7
+            staff.queu7 = staff.queu
         if staff.spot == "8":
-            staff.spot.spot8 = 8
-            staff.queu.spot8 = staff.queu
+            staff.spot8 = 8
+            staff.queu8 = staff.queu
         if staff.spot == "9":
-            staff.spot.spot9 = 9
-            staff.queu.spot9 = staff.queu
+            staff.spot9 = 9
+            staff.queu9 = staff.queu
         if staff.spot == "10":
-            staff.spot.spot10 = 10
-            staff.queu.spot10 = staff.queu
+            staff.spot10 = 10
+            staff.queu10 = staff.queu
         return redirect("/numero")
     return render_template("staff.html", cubicle=CUBICLE, sisa=sisa, bank=BANK, hospital=HOSPITAL)
     
@@ -753,11 +757,27 @@ def staff():
 def numero():
     if request.method == "POST":
         if staff.spot == "1":
-            staff.spot.spot1
-            staff.queu.spot1
+            spot1 = int(staff.spot1)
+            queu1 = staff.queu1
+            next = request.form.get("next")
+            if next:
+                STAFFTURNOS[0] = STAFFTURNOS[0] + 1
+                numero.tunos = STAFFTURNOS[0]
+                if STAFFTURNOS[0] == 999:
+                    STAFFTURNOS[0] = 0
+                print(STAFFTURNOS[0])
+                return render_template("numero.html", turno=STAFFTURNOS[0], spot=spot1, queu=queu1, cub=spot1)
         if staff.spot == "2":
-            staff.spot.spot2 = 2
-            staff.queu.spot2 = staff.queu
+            spot2 = int(staff.spot2)
+            queu2 = staff.queu2
+            next = request.form.get("next")
+            if next:
+                STAFFTURNOS[1] = STAFFTURNOS[1] + 1
+                numero.tunos = STAFFTURNOS[1]
+                if STAFFTURNOS[1] == 999:
+                    STAFFTURNOS[1] = 0
+                print(STAFFTURNOS[1])
+                return render_template("numero.html", turno=STAFFTURNOS[0], spot=spot2, queu=queu2, cub=spot2)
         if staff.spot == "3":
             staff.spot.spot3 = 3
             staff.queu.spot3 = staff.queu
@@ -782,23 +802,12 @@ def numero():
         if staff.spot == "10":
             staff.spot.spot10 = 10
             staff.queu.spot10 = staff.queu
-        spot = int(staff.spot)
-        queu = staff.queu
-        print(spot)
-        print(queu)
-        next = request.form.get("next")
-        if next:
-            STAFFTURNOS[spot-1] = STAFFTURNOS[spot-1] + 1
-            numero.tunos = STAFFTURNOS[spot-1]
-            if STAFFTURNOS[spot-1] == 999:
-                STAFFTURNOS[spot-1] = 0
-            print(STAFFTURNOS[spot-1])
-        return render_template("numero.html", turno=STAFFTURNOS[spot-1], spot=spot, queu=queu)
     return render_template("numero.html")
 
 @app.route("/screen", methods=["GET", "POST"])
 def screen():
-    return render_template("screen.html", spot1=STAFFTURNOS[0], spot2=STAFFTURNOS[1], spot3=STAFFTURNOS[2], spot4=STAFFTURNOS[3], spot5=STAFFTURNOS[4], spot6=STAFFTURNOS[5], spot7=STAFFTURNOS[6], spot8=STAFFTURNOS[7], spot9=STAFFTURNOS[8], spot10=STAFFTURNOS[9], spot11=STAFFTURNOS[10], spot12=STAFFTURNOS[11], spot13=STAFFTURNOS[12], spot14=STAFFTURNOS[13], spot15=STAFFTURNOS[14], spot16=STAFFTURNOS[15], spot17=STAFFTURNOS[16], spot18=STAFFTURNOS[17], spot19=STAFFTURNOS[18], spot20=STAFFTURNOS[19])
+    print(STAFFTURNOS)
+    return render_template("screen.html", spot1=STAFFTURNOS[0], spot2=STAFFTURNOS[1], spot3=STAFFTURNOS[2], spot4=STAFFTURNOS[3], spot5=STAFFTURNOS[4], spot6=STAFFTURNOS[5], spot7=STAFFTURNOS[6], spot8=STAFFTURNOS[7], spot9=STAFFTURNOS[8], spot10=STAFFTURNOS[9])
     
     
     
