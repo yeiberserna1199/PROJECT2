@@ -23,19 +23,17 @@
     {% endblock %}
     {% block main %}
         <form action="/screen" method="post">
-            <script>
-                function autoRefresh() {
-                    window.location = window.location.href;
-                }
-                setInterval('autoRefresh()', 3000);
-            </script>
+            
             <div class="row align-items-start">
                 <div class="col">
                     <div class="card">
                         <div class="card-header">
                             <h3>Spot 1</h3>
-                            <h3>Turn</h3>
+                            <h3>{{queu1}} </h3>
                             <h3>{{spot1}} </h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary" type="submit" name="one" value="1">+</button>
                         </div>
                     </div>
                 </div>
@@ -43,8 +41,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>Spot 2</h3>
-                            <h3>Turn</h3>
+                            <h3>{{queu2}} </h3>
                             <h3>{{spot2}} </h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary" type="submit" name="two" value="2">+</button>
                         </div>
                     </div>
                 </div>
@@ -52,8 +53,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>Spot 3</h3>
-                            <h3>Turn</h3>
+                            <h3>{{queu3}} </h3>
                             <h3>{{spot3}} </h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary" type="submit" name="three" value="3">+</button>
                         </div>
                     </div>
                 </div>
@@ -61,8 +65,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>Spot 4</h3>
-                            <h3>Turn</h3>
+                            <h3>{{queu4}} </h3>
                             <h3>{{spot4}} </h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary" type="submit" name="four" value="4">+</button>
                         </div>
                     </div>
                 </div>
@@ -70,19 +77,27 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>Spot 5</h3>
-                            <h3>Turn</h3>
+                            <h3>{{queu5}} </h3>
                             <h3>{{spot5}} </h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary" type="submit" name="five" value="5">+</button>
                         </div>
                     </div>
                 </div>
             </div>
+            <p>  </p>
+            <p>  </p>
             <div class="row align-items-start">
                 <div class="col">
                     <div class="card">
                         <div class="card-header">
                             <h3>Spot 6</h3>
-                            <h3>Turn</h3>
+                            <h3>{{queu6}} </h3>
                             <h3>{{spot6}} </h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary" type="submit" name="six" value="6">+</button>
                         </div>
                     </div>
                 </div>
@@ -90,8 +105,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>Spot 7</h3>
-                            <h3>Turn</h3>
+                            <h3>{{queu7}} </h3>
                             <h3>{{spot7}} </h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary" type="submit" name="seven" value="7">+</button>
                         </div>
                     </div>
                 </div>
@@ -99,8 +117,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>Spot 8</h3>
-                            <h3>Turn</h3>
+                            <h3>{{queu8}} </h3>
                             <h3>{{spot8}} </h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary" type="submit" name="eight" value="8">+</button>
                         </div>
                     </div>
                 </div>
@@ -108,8 +129,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>Spot 9</h3>
-                            <h3>Turn</h3>
+                            <h3>{{queu9}} </h3>
                             <h3>{{spot9}} </h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary" type="submit" name="nine" value="9">+</button>
                         </div>
                     </div>
                 </div>
@@ -117,8 +141,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>Spot 10</h3>
-                            <h3>Turn</h3>
+                            <h3>{{queu10}} </h3>
                             <h3>{{spot10}} </h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary" type="submit" name="ten" value="10">+</button>
                         </div>
                     </div>
                 </div>
