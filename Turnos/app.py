@@ -719,27 +719,24 @@ def staff():
     user_id = id
     sisa = company()
     staf = "Ok"
+    staff.queu1 = request.form.get("queu1")
+    staff.queu2 = request.form.get("queu2")
+    staff.queu3 = request.form.get("queu3")
+    staff.queu4 = request.form.get("queu4")
+    staff.queu5 = request.form.get("queu5")
+    staff.queu6 = request.form.get("queu6")
+    staff.queu7 = request.form.get("queu7")
+    staff.queu8 = request.form.get("queu8")
+    staff.queu9 = request.form.get("queu9")
+    staff.queu10 = request.form.get("queu10")
+    print(staff.queu1)
     if request.method == "POST":    
-        staff.queu1 = request.form.get("queu1")
-        staff.queu2 = request.form.get("queu2")
-        staff.queu3 = request.form.get("queu3")
-        staff.queu4 = request.form.get("queu4")
-        staff.queu5 = request.form.get("queu5")
-        staff.queu6 = request.form.get("queu6")
-        staff.queu7 = request.form.get("queu7")
-        staff.queu8 = request.form.get("queu8")
-        staff.queu9 = request.form.get("queu9")
-        staff.queu10 = request.form.get("queu10")
-        return redirect("/numero")
+        return redirect("/control")
     return render_template("staff.html", cubicle=CUBICLE, sisa=sisa, bank=BANK, hospital=HOSPITAL)
-    
-@app.route("/numero", methods=["GET", "POST"])
-def numero():
-    if request.method == "POST":
-        return render_template("numero.html")
 
-@app.route("/screen", methods=["GET", "POST"])
-def screen():
+
+@app.route("/control", methods=["GET", "POST"])
+def control():
     print(STAFFTURNOS)
     sisa = company()
     if request.method == "POST":
@@ -763,8 +760,14 @@ def screen():
             STAFFTURNOS[8] = STAFFTURNOS[8] + 1
         if request.form.get("ten"):
             STAFFTURNOS[9] = STAFFTURNOS[9] + 1
-        
+    return render_template("control.html", sisa=sisa, bank=BANK, hospital=HOSPITAL, spot1=STAFFTURNOS[0], spot2=STAFFTURNOS[1], spot3=STAFFTURNOS[2], spot4=STAFFTURNOS[3], spot5=STAFFTURNOS[4], spot6=STAFFTURNOS[5], spot7=STAFFTURNOS[6], spot8=STAFFTURNOS[7], spot9=STAFFTURNOS[8], spot10=STAFFTURNOS[9], queu1=staff.queu1, queu2=staff.queu2, queu3=staff.queu3, queu4=staff.queu4, queu5=staff.queu5, queu6=staff.queu6, queu7=staff.queu7, queu8=staff.queu8, queu9=staff.queu9, queu10=staff.queu10)
+
+
+@app.route("/screen", methods=["GET", "POST"])
+def screen():
+    sisa = company()
     return render_template("screen.html", sisa=sisa, bank=BANK, hospital=HOSPITAL, spot1=STAFFTURNOS[0], spot2=STAFFTURNOS[1], spot3=STAFFTURNOS[2], spot4=STAFFTURNOS[3], spot5=STAFFTURNOS[4], spot6=STAFFTURNOS[5], spot7=STAFFTURNOS[6], spot8=STAFFTURNOS[7], spot9=STAFFTURNOS[8], spot10=STAFFTURNOS[9], queu1=staff.queu1, queu2=staff.queu2, queu3=staff.queu3, queu4=staff.queu4, queu5=staff.queu5, queu6=staff.queu6, queu7=staff.queu7, queu8=staff.queu8, queu9=staff.queu9, queu10=staff.queu10)
+    
     
     
     
