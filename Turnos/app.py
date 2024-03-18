@@ -771,5 +771,4 @@ def screen():
     
     
     
-###missing: we need that after the staff choose their spot and queu, they can click on next and the next cx information and turn reflected in the screen###
-### menu/staff to make the part of the staff that say next turn and alll that shit ###
+###cuando se abre primero screen que staff arroja error, corregir eso de alguna forma ###
