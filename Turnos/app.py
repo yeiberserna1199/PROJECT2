@@ -9,6 +9,7 @@ from datetime import date
 import datetime
 from functools import wraps
 from itsdangerous import URLSafeTimedSerializer as Serializer
+import webbrowser
 
 
 app = Flask(__name__)
@@ -766,8 +767,6 @@ def control():
 @app.route("/screen", methods=["GET", "POST"])
 def screen():
     sisa = company()
-    if not staff.queu1 or not staff.queu2 or not staff.queu3 or not staff.queu4:
-        return redirect("/staff")
     return render_template("screen.html", sisa=sisa, bank=BANK, hospital=HOSPITAL, spot1=STAFFTURNOS[0], spot2=STAFFTURNOS[1], spot3=STAFFTURNOS[2], spot4=STAFFTURNOS[3], spot5=STAFFTURNOS[4], spot6=STAFFTURNOS[5], spot7=STAFFTURNOS[6], spot8=STAFFTURNOS[7], spot9=STAFFTURNOS[8], spot10=STAFFTURNOS[9], queu1=staff.queu1, queu2=staff.queu2, queu3=staff.queu3, queu4=staff.queu4, queu5=staff.queu5, queu6=staff.queu6, queu7=staff.queu7, queu8=staff.queu8, queu9=staff.queu9, queu10=staff.queu10)
     
     
