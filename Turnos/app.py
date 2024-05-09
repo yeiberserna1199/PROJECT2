@@ -10,6 +10,7 @@ import datetime
 from functools import wraps
 from itsdangerous import URLSafeTimedSerializer as Serializer
 import webbrowser
+import validator_collection
 
 
 app = Flask(__name__)
@@ -160,8 +161,9 @@ def register():
     security = request.form.get("securityquestion")
     answer = request.form.get("answer")
     date = datetime.datetime.now()
+    valid = validate(email)
     if request.method == "POST":
-        if not email:
+        if valid == False:
             error = "No email was found, please put your email"
             return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION, error=error)
         if not password:
@@ -199,6 +201,12 @@ def register():
         print(session["user_id"])
         return redirect("/home")
     return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION)
+
+def validate(s):
+    try:
+        email = validator_collection.validators.email(s)
+    except (validator_collection.errors.EmptyValueError, validator_collection.errors.InvalidEmailError):
+        return False
 
 @app.route("/forgot", methods=["GET", "POST"])
 def forgot():
@@ -770,6 +778,9 @@ def screen():
     return render_template("screen.html", sisa=sisa, bank=BANK, hospital=HOSPITAL, spot1=STAFFTURNOS[0], spot2=STAFFTURNOS[1], spot3=STAFFTURNOS[2], spot4=STAFFTURNOS[3], spot5=STAFFTURNOS[4], spot6=STAFFTURNOS[5], spot7=STAFFTURNOS[6], spot8=STAFFTURNOS[7], spot9=STAFFTURNOS[8], spot10=STAFFTURNOS[9], queu1=staff.queu1, queu2=staff.queu2, queu3=staff.queu3, queu4=staff.queu4, queu5=staff.queu5, queu6=staff.queu6, queu7=staff.queu7, queu8=staff.queu8, queu9=staff.queu9, queu10=staff.queu10)
     
     
+    
+if __name__ == "__main__":
+    app.run()
     
     
 ###cuando se abre primero screen que staff arroja error, corregir eso de alguna forma ###
