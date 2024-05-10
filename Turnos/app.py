@@ -161,9 +161,9 @@ def register():
     security = request.form.get("securityquestion")
     answer = request.form.get("answer")
     date = datetime.datetime.now()
-    valid = validate(email)
+    val = validate(email)
     if request.method == "POST":
-        if valid == False:
+        if val == False:
             error = "No email was found, please put your email"
             return render_template("register.html", options=OPTIONS, size=SIZE, question=QUESTION, error=error)
         if not password:
